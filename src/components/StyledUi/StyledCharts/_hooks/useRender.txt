@@ -1,0 +1,36 @@
+import React, { useMemo } from 'react';
+
+import { StyledPieChart } from '../StyledPieChart/StyledPieChart';
+import { StyledChartsProps } from '../StyledCharts.types';
+
+export type UseRenderPropsType = 'pie' | 'bar' | 'stacked-bar';
+
+export interface UseRenderPropsChart extends StyledChartsProps {
+  filteredByKeys?: string[];
+  type: 'pie' | 'bar' | 'stacked-bar';
+}
+
+interface StatusProps {
+  isLoading?: boolean;
+  hasError?: string;
+  hasMessage?: string;
+}
+export interface UseRenderProps extends StatusProps {
+  charts: UseRenderPropsChart[];
+  data?: Record<string, unknown>[];
+  stackedData?: Record<string, Record<string, unknown>[]>;
+  isLoading?: boolean;
+  hasError?: string;
+  hasMessage?: string;
+}
+
+interface PieProps extends UseRenderPropsChart, StatusProps {
+  data?: Record<string, unknown>[];
+}
+
+const PieChart = ({ data, isLoading, hasMessage, hasError, ...rest }: PieProps) => {
+  const Chart = useMemo(() => {
+    if (!data && !isLoading && !hasMessage && !hasError) return <div>error loading chart</div>;
+    else return data && <StyledPieChart {...rest} {...{ data }} />;
+  }, [data, isLoading, hasMessage, hasError]);
+};

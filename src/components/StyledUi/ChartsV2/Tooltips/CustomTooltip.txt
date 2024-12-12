@@ -1,0 +1,70 @@
+import React, { FC } from 'react';
+import { VictoryTooltipProps } from 'victory';
+import styled from 'styled-components';
+
+const DD = styled.div`
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #333;
+  padding: 10px;
+`;
+type TooltipProps = VictoryTooltipProps & {
+  label?: string | number;
+  value?: number;
+};
+
+const Tooltip: FC<TooltipProps> = ({ label, value, ...props }) => {
+  // to pass TS.  This file isn't being used ATM
+  console.log({ props });
+  return (
+    <DD>
+      <div>{label}</div>
+      <div>{value}</div>
+    </DD>
+  );
+};
+
+export const CustomBaseTooltip: FC<VictoryTooltipProps> = (
+  props: React.PropsWithChildren<VictoryTooltipProps>
+) => {
+  if (props.active && props.datum) {
+    return <Tooltip label={props?.y} value={props?.x} />;
+  }
+
+  return <div>{props.children}</div>;
+};
+
+export default CustomBaseTooltip;
+
+/**
+// 3rd party libs
+import React, { ReactElement } from 'react';
+import styled from 'styled-components';
+import { JSXElementConstructor } from 'react';
+
+interface Props {
+  label?: string;
+  count?: number;
+  percent?: number;
+}
+
+const Container = styled.div`
+  padding: 1rem;
+`;
+
+export const CustomBaseTooltip = ({ label, count, percent }: Props): JSX.Element => (
+  <Container>
+    <span className='tooltip__label'>
+      {label}
+    </span>
+    <span className='tooltip__label'>
+      {count}
+    </span>
+    <span className='tooltip__label'>
+      {percent?.toFixed(2)}% asdfsafdsadf
+    </span>
+  </Container>
+);
+**/

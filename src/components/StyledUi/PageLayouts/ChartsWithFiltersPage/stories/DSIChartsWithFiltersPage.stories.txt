@@ -1,0 +1,67 @@
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ChartsWithFiltersPage } from '../ChartsWithFiltersPage';
+import { useGetAvureAlarmsQueryDemoDataFormatted } from 'components/StyledUi/demoData/avureAlarmsQueryDemoData';
+import { useGetAvureAlarmsDemoData } from 'pages/FleetMachineDetail/demoData/useGetAvureAlarmsDemoData';
+import { styledTheme } from 'components/StyledUi/theme';
+import { processAlarmsData } from '../helpers/processAlarmsData';
+import { useDateRange } from 'components/StyledUi/DateRange';
+import { generateDateRangeCategories } from '../helpers/chartDataHelpers';
+import { dsiAlarmsDemoData } from 'components/StyledUi/demoData/dsiAlarmsDemoData';
+import { DSIAlarmsDemoPage } from '../demoPages/DSIAlarmsPage';
+
+export default {
+  title: 'StyledUi/PageViewLayouts'
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+} as ComponentMeta<typeof ChartsWithFiltersPage>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof ChartsWithFiltersPage> = () => {
+  return <DSIAlarmsDemoPage />;
+};
+
+const data = processAlarmsData(dsiAlarmsDemoData, {
+  // ads the start of day as an iso string to new key `date`
+  addDateAsKey: `date`,
+  // calculates duration and adds new key `duration`
+  //addDurationAsKey: `duration`,
+  startTimeKey: `timestamp`,
+  //endTimeKey: `endTimestamp`,
+  //timeZone: `CST6CDT`,
+  convertKeys: {
+    sender_id: {
+      0: `Custom Alert`,
+      1: `it's on fire`,
+      2: `the door is open`,
+      5: `total meltdown`,
+      19: `too cold`,
+      addAsNewKey: `group`
+    }
+  }
+});
+
+export const DSIChartsWithFiltersPageDemo = Template.bind({});
+
+DSIChartsWithFiltersPageDemo.args = {
+  data,
+  //groupKey: `type`,
+  categoryKey: `date`,
+  children: 'test',
+  csvFileSettings: {
+    fileName: `demo_file-name_2023-10-30_to_2023-11-15`
+  },
+  charts: [
+    {
+      title: 'Stacked Bar Chart',
+      chartType: 'stacked-bar',
+      groupKey: 'group',
+      categoryKey: 'date',
+      colors: styledTheme.charts.alarms
+    },
+    {
+      title: 'Pie Chart By Type',
+      chartType: 'pie-with-legend',
+      groupKey: 'group'
+    }
+  ]
+};

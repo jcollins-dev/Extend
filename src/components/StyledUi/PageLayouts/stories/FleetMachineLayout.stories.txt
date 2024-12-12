@@ -1,0 +1,52 @@
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { FleetMachineLayout } from '../pages/fleet/FleetMachineLayout';
+
+import { routerTabsDemoData } from 'components/StyledUi/RouterTabNav/demo/routerTabsDemoData';
+import { fleetBreadCrumbsDemoSettings } from 'components/StyledUi/FleetBreadCrumbs/demo/fleetBreadCrumbsDemoSettings';
+import { machineDetailsBarDemoSettings } from 'components/StyledUi/MachineDetailsBar/demo/machineDetailsBarDemoSettings';
+import { fleetMachineViewsDemo } from '../demo/fleetMachinePageViewsDemo';
+import { DateRangeProvider } from 'components/StyledUi/DateRange';
+
+export default {
+  title: 'StyledUi/Layouts/Fleet/Machine'
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+} as ComponentMeta<typeof FleetMachineLayout>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof FleetMachineLayout> = (args) => {
+  return (
+    <DateRangeProvider>
+      <FleetMachineLayout {...args} />
+    </DateRangeProvider>
+  );
+};
+
+export const Demo = Template.bind({});
+Demo.args = {
+  mainTabs: routerTabsDemoData,
+  basePath: `fleet/customerId/site/siteId/line/lineId/machine/machineId`,
+  breadCrumbs: fleetBreadCrumbsDemoSettings,
+  machineDetailsBar: machineDetailsBarDemoSettings,
+  PageViews: fleetMachineViewsDemo
+};
+
+export const WithPageViewsAndChild = Template.bind({});
+WithPageViewsAndChild.args = {
+  mainTabs: routerTabsDemoData,
+  basePath: `fleet/customerId/site/siteId/line/lineId/machine/machineId`,
+  breadCrumbs: fleetBreadCrumbsDemoSettings,
+  machineDetailsBar: machineDetailsBarDemoSettings,
+  PageViews: fleetMachineViewsDemo,
+  children: `I'm just a child`
+};
+
+export const WithChildrenOnly = Template.bind({});
+WithChildrenOnly.args = {
+  mainTabs: routerTabsDemoData,
+  basePath: `fleet/customerId/site/siteId/line/lineId/machine/machineId`,
+  breadCrumbs: fleetBreadCrumbsDemoSettings,
+  machineDetailsBar: machineDetailsBarDemoSettings,
+  children: `i'm just a child`,
+  hasDatePicker: true
+};

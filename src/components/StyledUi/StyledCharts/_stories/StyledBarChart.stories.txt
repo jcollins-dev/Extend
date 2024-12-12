@@ -1,0 +1,66 @@
+import React from 'react';
+import styled from 'styled-components';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { StyledBarChart } from '../StyledBarChart/StyledBarChart';
+import { demoAlarmsData } from './demoAlarmData';
+import { processApiData } from 'components/StyledUi/js';
+import { convertToChartData } from '../_helpers/chartDataHelpers';
+
+const DemoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+
+  div {
+    max-width: 600px;
+    width: 100%;
+    height: 300px;
+  }
+`;
+
+export default {
+  title: 'StyledUi/StyledCharts/Charts2'
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+} as ComponentMeta<typeof StyledBarChart>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof StyledBarChart> = (args) => {
+  return (
+    <DemoContainer>
+      <div>
+        <StyledBarChart {...args} />
+      </div>
+    </DemoContainer>
+  );
+};
+
+// convert the api date to a standard format
+const processedData = processApiData(demoAlarmsData, {
+  startTimeKey: 'startTimestamp',
+  endTimeKey: 'endTimestamp',
+  // this adds just the yyyy-mm-dd part of the value of startTimekey in the data object to key 'date'
+  addDateAsKey: 'date',
+  // adds the duration in seconds between the start and end time to key 'duration'
+  addDurationAsKey: 'duration'
+});
+
+// now we convert the chart data
+const data =
+  processedData &&
+  convertToChartData(
+    // the data that has been processed
+    processedData,
+    // the key to group the data by, each group is a pie slice
+    'type',
+    {
+      // sets to true to add new key 'percent' to each data object
+      calculatePercents: true
+    }
+  );
+
+export const StyledBarChartDemo = Template.bind({});
+StyledBarChartDemo.args = {
+  data
+};

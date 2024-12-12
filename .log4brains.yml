@@ -1,0 +1,5 @@
+project:
+  name: extend-frontend
+  tz: America/Chicago
+  adrFolder: ./docs/adr
+  packages: []

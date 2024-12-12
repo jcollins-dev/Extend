@@ -1,0 +1,40 @@
+import React from 'react';
+import { renderHook } from '@testing-library/react-hooks';
+import { MemoryRouter, Route } from 'react-router-dom';
+import { useHistoricRecipes, HistoricRecipesProvider } from './useHistoricRecipes';
+import { Provider } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
+import theme from 'themes';
+import store from 'store';
+
+describe('useHistoricRecipes', () => {
+  it('returns isLoading true initially when required props are not present', () => {
+    const { result } = renderHook(() => useHistoricRecipes(), {
+      wrapper: MemoryRouter
+    });
+
+    expect(result.current.isLoading).toBe(true);
+  });
+
+  it('returns hasError when there is an error loading the config', () => {
+    const { result } = renderHook(() => useHistoricRecipes(), {
+      wrapper: ({ children }) => (
+        <Provider store={store}>
+          <MemoryRouter initialEntries={['/machine/1/historic-recipes']}>
+            <ThemeProvider theme={theme}>
+              <Route path="/machine/:machineId/historic-recipes">
+                <HistoricRecipesProvider>
+                  <div>{children}</div>
+                </HistoricRecipesProvider>
+              </Route>
+            </ThemeProvider>
+          </MemoryRouter>
+        </Provider>
+      )
+    });
+
+    result.current.isLoading = false;
+
+    expect(result.current.hasError).toBe('error loading config');
+  });
+});

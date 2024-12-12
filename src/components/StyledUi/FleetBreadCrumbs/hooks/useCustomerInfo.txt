@@ -1,0 +1,39 @@
+import { useEffect, useState } from 'react';
+import { useGetPlantByIdQuery, useGetLineInfoQuery } from 'api';
+import { useLocation } from 'react-router';
+import { demoSiteAccountData } from '../demo/fleetBreadCrumbsDemo';
+
+const Info = (plantId: string) => {
+  const { data } = useGetPlantByIdQuery(plantId);
+  return data;
+};
+
+const LineInfo = (lineId: string) => {
+  const { data } = useGetLineInfoQuery({ lineId });
+  return data;
+};
+
+export const useCustomerInfov1 = (): unknown => {
+  const [plantId, setPlantId] = useState<string>();
+
+  const [main, id] = useLocation()
+    .pathname.split('/')
+    .filter((x) => x !== '')
+    .filter((x) => x !== 'fleet');
+
+  useEffect(() => {
+    if (main === 'site' && id !== plantId) setPlantId(id);
+  }, [main, id]);
+
+  const siteInfo = false; //useInfo(plantId)
+
+  return siteInfo;
+};
+
+const demoData = [demoSiteAccountData];
+
+export const useCustomerInfo = (plantId?: string): unknown => {
+  const data = demoData.filter((x) => x.id === plantId);
+
+  return data;
+};

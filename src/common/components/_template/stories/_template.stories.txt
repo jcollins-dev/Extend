@@ -1,0 +1,28 @@
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { _template } from '../_template';
+
+
+export default {
+  title: 'V2/_templateGroup/_template',
+  component: _template,
+  parameters: {
+    // Use the excludeProps option to hide the 'data' prop from the "Show code" tab
+    docs: {
+      //excludeProps: ['data', 'xKey', 'yKey']
+    }
+  }
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+} as ComponentMeta<typeof _template>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof _template> = () => {
+  return (
+    <_template />
+  );
+};
+
+export const _templateDemo = Template.bind({});
+_templateDemo.args = {
+
+};

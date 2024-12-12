@@ -1,0 +1,26 @@
+type ObjectShape = {
+  [key: string]: any;
+};
+
+function validateProps<T extends ObjectShape>(props: T, requiredProps: Array<keyof T>) {
+  const errors = [];
+
+  // Check for required properties
+  requiredProps.forEach((prop) => {
+    if (!props[prop]) {
+      errors.push(`${prop} is required`);
+    }
+  });
+
+  // Return errors if any
+  if (errors.length > 0) {
+    return new Error(errors.join('\n'));
+  }
+
+  // Return null if no errors
+  return null;
+}
+
+const CheckForErrors = () => {
+
+}

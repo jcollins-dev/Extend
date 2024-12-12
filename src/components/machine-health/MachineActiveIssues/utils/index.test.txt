@@ -1,0 +1,477 @@
+import { render } from '@testing-library/react';
+import { filterGivenDataByKeyValue, formatDataForTable } from '.';
+import { TableXS } from '../TableXS/TableXS';
+
+describe('Filtering Data for Intensifiers', () => {
+  it('No items match provided filter', () => {
+    const TESTDATA = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: 'a test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      },
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: 'a test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      }
+    ];
+
+    const FILTER = {
+      description: ['test']
+    };
+
+    const result = filterGivenDataByKeyValue(TESTDATA, FILTER);
+
+    expect(result).toEqual([]);
+  });
+
+  it('Matches 1 provided filter', () => {
+    const TESTDATA = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '2 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      },
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '1 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      }
+    ];
+    const FILTER = {
+      description: ['2 test alert has been sent']
+    };
+    const result = filterGivenDataByKeyValue(TESTDATA, FILTER);
+    const output = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '2 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      }
+    ];
+    expect(result).toEqual(output);
+  });
+
+  it('Matches 2 provided filters', () => {
+    const TESTDATA = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '2 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      },
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '1 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      }
+    ];
+    const FILTER = {
+      description: ['2 test alert has been sent', '1 test alert has been sent']
+    };
+    const result = filterGivenDataByKeyValue(TESTDATA, FILTER);
+    const output = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '2 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      },
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '1 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      }
+    ];
+    expect(result).toEqual(output);
+  });
+
+  it('Provided filter is empty', () => {
+    const TESTDATA = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '2 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      },
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '1 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      }
+    ];
+    const FILTER = {
+      description: []
+    };
+    const result = filterGivenDataByKeyValue(TESTDATA, FILTER);
+    expect(result).toEqual([]);
+  });
+
+  it('Provided filter key doesnt match data keys', () => {
+    const TESTDATA = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '2 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      },
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '1 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      }
+    ];
+    const FILTER = {
+      misspelledkeydescr: ['1 test alert has been sent']
+    };
+    const result = filterGivenDataByKeyValue(TESTDATA, FILTER);
+    expect(result).toEqual([]);
+  });
+});
+
+describe('Formatting data for Avure Issues Table', () => {
+  it('Data is formatted as expected', () => {
+    const TESTDATA = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: 'a test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00'
+      }
+    ];
+
+    const result = formatDataForTable(TESTDATA);
+    const output = [
+      {
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: 'a test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        duration: undefined,
+        timestamp: '9/28/23, 9:53 AM'
+      }
+    ];
+
+    expect(result).toEqual(output);
+  });
+
+  it('Initial data is missing createdAt', () => {
+    const TESTDATA = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: 'a test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations'
+      }
+    ];
+
+    const result = formatDataForTable(TESTDATA);
+    const output = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: 'a test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        timestamp: undefined,
+        duration: undefined
+      }
+    ];
+
+    expect(result).toEqual(output);
+  });
+});
+
+describe('Rendering widget with alerts for intesifier', () => {
+  it('Renders table with full data', () => {
+    const TESTDATA = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '2 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      },
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '1 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: '9/28/23, 9:53 AM'
+      }
+    ];
+    const FILTER = {
+      description: ['2 test alert has been sent']
+    };
+    const result = filterGivenDataByKeyValue(TESTDATA, FILTER);
+    const tableData = formatDataForTable(result);
+
+    const columnSettings = [
+      {
+        key: 'id',
+        label: <img src={''} alt="alert" />
+      },
+      {
+        key: 'timestamp',
+        label: (e: string) => (
+          <>
+            <span>{e}</span>
+          </>
+        )
+      },
+      {
+        key: 'description',
+        label: 'Message'
+      }
+    ];
+
+    const tableSettings = {
+      columnSettings: columnSettings,
+      data: tableData,
+      customClass: 'active-issues'
+    };
+
+    render(<TableXS {...tableSettings} />);
+  });
+
+  it('Renders table with empty data', () => {
+    const TESTDATA = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '2 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00'
+      },
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '1 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00'
+      }
+    ];
+    const FILTER = {
+      description: ['2 test alert has been sent']
+    };
+    const result = filterGivenDataByKeyValue(TESTDATA, FILTER);
+    const tableData = formatDataForTable(result);
+
+    const columnSettings = [
+      {
+        key: 'id',
+        label: <img src={''} alt="alert" />
+      },
+      {
+        key: 'timestamp',
+        label: (e: string) => (
+          <>
+            <span>{e}</span>
+          </>
+        )
+      },
+      {
+        key: 'description',
+        label: 'Message'
+      }
+    ];
+
+    const tableSettings = {
+      columnSettings: columnSettings,
+      data: tableData,
+      customClass: 'active-issues'
+    };
+
+    render(<TableXS {...tableSettings} />);
+  });
+
+  it('Renders table with missing timestamp', () => {
+    const TESTDATA = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '2 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations'
+      },
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '1 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: undefined
+      }
+    ];
+    const FILTER = {
+      description: ['2 test alert has been sent']
+    };
+    const result = filterGivenDataByKeyValue(TESTDATA, FILTER);
+    const tableData = formatDataForTable(result);
+
+    const columnSettings = [
+      {
+        key: 'id',
+        label: <img src={''} alt="alert" />
+      },
+      {
+        key: 'timestamp',
+        label: (e: string) => (
+          <>
+            <span>{e}</span>
+          </>
+        )
+      },
+      {
+        key: 'description',
+        label: 'Message'
+      }
+    ];
+
+    const tableSettings = {
+      columnSettings: columnSettings,
+      data: tableData,
+      customClass: 'active-issues'
+    };
+
+    render(<TableXS {...tableSettings} />);
+  });
+
+  it('Renders table with missing description', () => {
+    const TESTDATA = [
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        status: 'not_complete',
+        alertType: 'operations'
+      },
+      {
+        id: 'e5e0f491-f3f5-4fed-9913-c637bdf67c6c',
+        internalId:
+          '997be3d3-5200-46cb-b9b5-4ff35c0149fe_high_decompression_valve_temperature_decomp_valve_temperature_r_operations',
+        description: '1 test alert has been sent',
+        status: 'not_complete',
+        alertType: 'operations',
+        createdAt: '2023-09-28T13:53:35+00:00',
+        timestamp: undefined
+      }
+    ];
+    const FILTER = {
+      description: ['2 test alert has been sent']
+    };
+    const result = filterGivenDataByKeyValue(TESTDATA, FILTER);
+    const tableData = formatDataForTable(result);
+
+    const columnSettings = [
+      {
+        key: 'id',
+        label: <img src={''} alt="alert" />
+      },
+      {
+        key: 'timestamp',
+        label: (e: string) => (
+          <>
+            <span>{e}</span>
+          </>
+        )
+      },
+      {
+        key: 'description',
+        label: 'Message'
+      }
+    ];
+
+    const tableSettings = {
+      columnSettings: columnSettings,
+      data: tableData,
+      customClass: 'active-issues'
+    };
+
+    render(<TableXS {...tableSettings} />);
+  });
+});

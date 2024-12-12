@@ -1,0 +1,119 @@
+
+const SVGProgressRing = ({
+  strokeWidth,
+  progress,
+  color,
+  bgColor
+}: {
+  radius?: number;
+  strokeWidth?: number;
+  progress: number;
+  color: string;
+  bgColor?: string;
+}) => {
+  strokeWidth = strokeWidth || 15; // Set a default stroke width
+
+  const radius = 50; // Set a default radius
+  const normalizedRadius = radius - strokeWidth / 2;
+  const circumference = normalizedRadius * 2 * Math.PI;
+  const offset = ((100 - progress) / 100) * circumference; // Adjusted to start at the top
+
+  return (
+    <svg width="100%" height="100%" viewBox={`0 0 ${radius * 2 + 5} ${radius * 2 + 5}`}>
+      <g transform={`translate(${radius}, ${radius}) rotate(-90)`}>
+        <circle
+          stroke={bgColor || 'lightgray'}
+          fill="transparent"
+          strokeWidth={strokeWidth}
+          r={normalizedRadius}
+          filter={`drop-shadow(-3px 0px 1px rgba(0,0,0,0.2))`}
+          cx={0}
+          cy={0}
+        />
+        <circle
+          stroke={color}
+          fill="transparent"
+          strokeWidth={strokeWidth}
+          // add option to change this from square to rounded
+          //strokeLinecap="round"
+          r={normalizedRadius}
+          cx={0}
+          cy={0}
+          strokeDasharray={circumference + ' ' + circumference}
+          strokeDashoffset={offset}
+        />
+      </g>
+    </svg>
+  );
+};
+
+const CircleProgressBarContainer = styled.div`
+  display: grid;
+  position: relative;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: 'progress-ring';
+
+  svg {
+    position: relative;
+    grid-area: progress-ring;
+  }
+
+  .progress-ring__text {
+    grid-area: progress-ring;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+
+    .progress-ring__title {
+      font-size: 0.8em;
+    }
+
+    .progress-ring__progress {
+      font-size: 2em;
+      font-weight: 300;
+    }
+
+    .progress-ring__label {
+      font-size: 0.9em;
+      font-weight: 600;
+    }
+  }
+`;
+export interface ProgressRingProps {
+  label?: string;
+  title?: string;
+  progress?: number;
+  color: string;
+}
+
+const ProgressRing = ({ label, title, progress, color }: ProgressRingProps): JSX.Element => {
+  //////////////////////////////
+  // TODO:
+  // --------------------------
+  // Move this to it's own component folder for re-use
+  // Need to write a storybook for this also.
+  // I'm having problems with my storybook setup, so I'm going to move on and come back to it later
+  // - Joey
+
+  progress = progress || 0;
+
+  return (
+    <CircleProgressBarContainer className="progress-ring">
+      <div className="progress-ring__text">
+        <div className="progress-ring__text-inner">
+          <div className="progress-ring__title">{title}</div>
+          <div className="progress-ring__progress">{progress}%</div>
+          <div className="progress-ring__label">{label}</div>
+        </div>
+      </div>
+      <SVGProgressRing {...{ progress, color }} />
+    </CircleProgressBarContainer>
+  );
+};

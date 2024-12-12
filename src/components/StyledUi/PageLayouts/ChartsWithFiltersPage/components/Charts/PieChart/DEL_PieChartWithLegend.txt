@@ -1,0 +1,57 @@
+import React from 'react';
+import { PieChart, PieChartProps } from './PieChart';
+import { DimensionsContainer } from 'components';
+import { PieChartLegend, PieChartLegendProps } from './PieChartLegend';
+import { PieChartWithLegendContainer } from './PieChartWithLegend.elements';
+import { StyledUiContainerProps } from 'components';
+
+export interface PieChartWithLegendProps
+  extends StyledUiContainerProps,
+  PieChartProps,
+  PieChartLegendProps { }
+
+export const PieChartWithLegend = ({
+  data,
+  className,
+  legendItems,
+  legendItemsSelected,
+  handleClick,
+  checkIfSelected,
+  colorScale,
+  colorKey,
+  colors,
+  handleLegendClick,
+  CustomTooltip
+}: PieChartWithLegendProps): JSX.Element => {
+  return (
+    <PieChartWithLegendContainer {...{ className }}>
+      <DimensionsContainer
+        Component={(dimensions) => {
+          return (
+            <PieChart
+              {...{
+                data,
+                dimensions,
+                colors,
+                handleClick,
+                checkIfSelected,
+                colorScale,
+                colorKey,
+                CustomTooltip,
+                labelRadius: dimensions.width / 2,
+                formatLabels: (datum) => {
+                  const y = datum.y as number;
+                  return `${y}%`;
+                  //return Number(y as number) > 15 ? `${y}%` : ``;
+                }
+              }}
+            />
+          );
+        }}
+      />
+
+      
+    </PieChartWithLegendContainer>
+  );
+};
+

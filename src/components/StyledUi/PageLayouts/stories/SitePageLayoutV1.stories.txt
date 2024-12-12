@@ -1,0 +1,25 @@
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { SitePageLayout } from '../SitePageLayoutV1';
+
+import { routerTabsDemoData } from 'components/StyledUi/RouterTabNav/demo/routerTabsDemoData';
+import { fleetBreadCrumbsDemoSettings } from 'components/StyledUi/FleetBreadCrumbs/demo/fleetBreadCrumbsDemoSettings';
+import { machineDetailsBarDemoSettings } from 'components/StyledUi/MachineDetailsBar/demo/machineDetailsBarDemoSettings';
+
+export default {
+  title: 'StyledUi/SitePageLayout/v1'
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+} as ComponentMeta<typeof SitePageLayout>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof SitePageLayout> = (args) => {
+  return <SitePageLayout {...args} />;
+};
+
+export const Demo = Template.bind({});
+Demo.args = {
+  mainTabs: routerTabsDemoData,
+  basePath: `demo/base-path`,
+  breadCrumbs: fleetBreadCrumbsDemoSettings,
+  machineDetailsBar: machineDetailsBarDemoSettings
+};

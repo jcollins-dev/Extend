@@ -1,0 +1,44 @@
+import React from 'react';
+import { PieChartLegendContainer, PieChartLegendItemContainer } from './PieChartLegend.elements';
+
+export interface PieChartLegendProps {
+  legendItems: {
+    label: string;
+    color?: string;
+  }[];
+  legendItemsSelected?: string[];
+  handleLegendClick: (label: string) => void;
+}
+export const PieChartLegend = ({
+  legendItems,
+  legendItemsSelected,
+  handleLegendClick
+}: PieChartLegendProps): JSX.Element => {
+  return (
+    <PieChartLegendContainer className="pie-chart-legend">
+      {legendItems?.map(({ label, color }) => {
+        const isSelected = !legendItemsSelected ? true : legendItemsSelected?.includes(label);
+        const useLabel =
+          label === 'Critical'
+            ? 'A-Alarm (Critical)'
+            : label === 'Product'
+            ? 'B-Alarm (Product)'
+            : label === 'Warning'
+            ? 'C-Alarm (Warning)'
+            : label;
+        return (
+          <PieChartLegendItemContainer
+            key={label}
+            color={color}
+            className="pie-chart-legend__item"
+            data-muted={!isSelected ? 'true' : undefined}
+          >
+            <button type="button" onClick={() => handleLegendClick?.(label)}>
+              {useLabel} {/*showCount && y && <span className="item-count">{y}</span>*/}
+            </button>
+          </PieChartLegendItemContainer>
+        );
+      })}
+    </PieChartLegendContainer>
+  );
+};

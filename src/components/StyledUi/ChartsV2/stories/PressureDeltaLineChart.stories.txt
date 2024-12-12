@@ -1,0 +1,78 @@
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import demoUnformattedData from '../demo/demoRecipesHistoryData';
+import { LineChart } from '../LineChart/LineChart';
+import { LineChartDataItemProps } from '../Charts.types';
+import moment from 'moment';
+import { DimensionsContainer } from 'components/StyledUi/DimensionsContainer';
+//import data from '../demo/demoLineChartData';
+import { useGetPressurizeCycleDataByIdQueryData } from '../../demoData/useGetPressurizeCycleDataByIdQuery.data';
+
+import {
+  calculateStackedMaxDomain,
+  convertToChartData,
+  generateCategoriesArray
+} from '../helpers/chartDataHelpers';
+import styled from 'styled-components';
+
+const DemoContainer = styled.div`
+  width: 100%;
+  height: 300px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 300px;
+  grid-tempalte-columns: 1fr;
+`;
+
+export default {
+  title: 'StyledUi/ChartsV2/TestCharts'
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+} as ComponentMeta<typeof LineChart>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof LineChart> = (args) => {
+  return (
+    <DemoContainer>
+      <DimensionsContainer
+        Component={({ width, height }) => <LineChart {...args} {...{ width, height }} />}
+      />
+    </DemoContainer>
+  );
+};
+
+// x: date, y: val
+const generatePressurizedCycleChartData = (
+  data: Record<string, unknown>[]
+): LineChartDataItemProps[] => {
+  let deltaCounter = 0;
+
+  const runData = data.reverse();
+  const chartData = runData.reduce((acc: LineChartDataItemProps[], obj) => {
+    const ideal = obj.idealPressurizeTime as number;
+    const current = obj.pressurizeTime as number;
+
+    if (!ideal || !current) return acc;
+
+    const delta = Math.floor(ideal - current);
+
+    if (delta < 0) return acc;
+
+    deltaCounter = deltaCounter + delta;
+
+    const date = moment(obj.startTime as string).format();
+    console.log({ date });
+
+    return (acc = [...acc, { x: moment(obj.startTime as string).toDate(), y: deltaCounter }]);
+  }, []);
+
+  console.log({ chartData });
+  return chartData;
+};
+
+export const PressureDeltaLineChartDemo = Template.bind({});
+PressureDeltaLineChartDemo.args = {
+  canZoom: true,
+  data: generatePressurizedCycleChartData(useGetPressurizeCycleDataByIdQueryData)
+  //maxDomain: calculateStackedMaxDomain(demoUnformattedData, `date`),
+  //categories: generateCategoriesArray(demoUnformattedData, `date`)
+};

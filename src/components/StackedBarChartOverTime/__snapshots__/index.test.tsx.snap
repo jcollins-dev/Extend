@@ -1,0 +1,1055 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StackedBarChartOverTime Matches snapshot when rendering with data 1`] = `
+<div>
+  <div>
+    <div
+      class="VictoryContainer"
+      style="height: 100%; width: 100%; user-select: none; pointer-events: none; position: relative;"
+    >
+      <svg
+        height="400"
+        role="img"
+        style="pointer-events: all; width: 100%; height: 100%;"
+        viewBox="0 0 400 400"
+        width="400"
+      >
+        <g>
+          <g
+            role="presentation"
+          >
+            <path
+              d="M 55.079365125649716, 41.49999999999999 
+A 0 0 0 0 0, 55.079365125649716, 41.49999999999999 
+L 55.079365125649716, 41.49999999999999 
+A 0 0 0 0 0, 55.079365125649716, 41.49999999999999 
+L 80.07936512564972, 41.49999999999999 
+A 0 0 0 0 0, 80.07936512564972, 41.49999999999999 
+L 80.07936512564972, 41.49999999999999 
+A 0 0 0 0 0, 80.07936512564972, 41.49999999999999 
+ z"
+              index="0"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 86.57142861308475, 151 
+A 0 0 0 0 0, 86.57142861308475, 151 
+L 86.57142861308475, 151 
+A 0 0 0 0 0, 86.57142861308475, 151 
+L 111.57142861308475, 151 
+A 0 0 0 0 0, 111.57142861308475, 151 
+L 111.57142861308475, 151 
+A 0 0 0 0 0, 111.57142861308475, 151 
+ z"
+              index="1"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 118.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 118.06349210051977, 114.50000000000001 
+L 118.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 118.06349210051977, 114.50000000000001 
+L 143.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 143.06349210051977, 114.50000000000001 
+L 143.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 143.06349210051977, 114.50000000000001 
+ z"
+              index="2"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 149.55555558795479, 5 
+A 0 0 0 0 0, 149.55555558795479, 5 
+L 149.55555558795479, 5 
+A 0 0 0 0 0, 149.55555558795479, 5 
+L 174.55555558795479, 5 
+A 0 0 0 0 0, 174.55555558795479, 5 
+L 174.55555558795479, 5 
+A 0 0 0 0 0, 174.55555558795479, 5 
+ z"
+              index="3"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 181.04761907538983, 5 
+A 0 0 0 0 0, 181.04761907538983, 5 
+L 181.04761907538983, 5 
+A 0 0 0 0 0, 181.04761907538983, 5 
+L 206.04761907538983, 5 
+A 0 0 0 0 0, 206.04761907538983, 5 
+L 206.04761907538983, 5 
+A 0 0 0 0 0, 206.04761907538983, 5 
+ z"
+              index="4"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 275.52380953769494, 370 
+A 0 0 0 0 1, 275.52380953769494, 370 
+L 275.52380953769494, 260.5 
+A 0 0 0 0 1, 275.52380953769494, 260.5 
+L 300.52380953769494, 260.5 
+A 0 0 0 0 1, 300.52380953769494, 260.5 
+L 300.52380953769494, 370 
+A 0 0 0 0 1, 300.52380953769494, 370 
+ z"
+              index="5"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 338.507936512565, 297 
+A 0 0 0 0 0, 338.507936512565, 297 
+L 338.507936512565, 297 
+A 0 0 0 0 0, 338.507936512565, 297 
+L 363.507936512565, 297 
+A 0 0 0 0 0, 363.507936512565, 297 
+L 363.507936512565, 297 
+A 0 0 0 0 0, 363.507936512565, 297 
+ z"
+              index="6"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+          </g>
+          <g
+            role="presentation"
+          >
+            <path
+              d="M 55.079365125649716, 41.49999999999999 
+A 0 0 0 0 0, 55.079365125649716, 41.49999999999999 
+L 55.079365125649716, 41.49999999999999 
+A 0 0 0 0 0, 55.079365125649716, 41.49999999999999 
+L 80.07936512564972, 41.49999999999999 
+A 0 0 0 0 0, 80.07936512564972, 41.49999999999999 
+L 80.07936512564972, 41.49999999999999 
+A 0 0 0 0 0, 80.07936512564972, 41.49999999999999 
+ z"
+              index="0"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 86.57142861308475, 151 
+A 0 0 0 0 0, 86.57142861308475, 151 
+L 86.57142861308475, 151 
+A 0 0 0 0 0, 86.57142861308475, 151 
+L 111.57142861308475, 151 
+A 0 0 0 0 0, 111.57142861308475, 151 
+L 111.57142861308475, 151 
+A 0 0 0 0 0, 111.57142861308475, 151 
+ z"
+              index="1"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 118.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 118.06349210051977, 114.50000000000001 
+L 118.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 118.06349210051977, 114.50000000000001 
+L 143.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 143.06349210051977, 114.50000000000001 
+L 143.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 143.06349210051977, 114.50000000000001 
+ z"
+              index="2"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 149.55555558795479, 114.50000000000001 
+A 0 0 0 0 1, 149.55555558795479, 114.50000000000001 
+L 149.55555558795479, 5 
+A 0 0 0 0 1, 149.55555558795479, 5 
+L 174.55555558795479, 5 
+A 0 0 0 0 1, 174.55555558795479, 5 
+L 174.55555558795479, 114.50000000000001 
+A 0 0 0 0 1, 174.55555558795479, 114.50000000000001 
+ z"
+              index="3"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 181.04761907538983, 5 
+A 0 0 0 0 0, 181.04761907538983, 5 
+L 181.04761907538983, 5 
+A 0 0 0 0 0, 181.04761907538983, 5 
+L 206.04761907538983, 5 
+A 0 0 0 0 0, 206.04761907538983, 5 
+L 206.04761907538983, 5 
+A 0 0 0 0 0, 206.04761907538983, 5 
+ z"
+              index="4"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 275.52380953769494, 370 
+A 0 0 0 0 0, 275.52380953769494, 370 
+L 275.52380953769494, 370 
+A 0 0 0 0 0, 275.52380953769494, 370 
+L 300.52380953769494, 370 
+A 0 0 0 0 0, 300.52380953769494, 370 
+L 300.52380953769494, 370 
+A 0 0 0 0 0, 300.52380953769494, 370 
+ z"
+              index="5"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 338.507936512565, 297 
+A 0 0 0 0 0, 338.507936512565, 297 
+L 338.507936512565, 297 
+A 0 0 0 0 0, 338.507936512565, 297 
+L 363.507936512565, 297 
+A 0 0 0 0 0, 363.507936512565, 297 
+L 363.507936512565, 297 
+A 0 0 0 0 0, 363.507936512565, 297 
+ z"
+              index="6"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+          </g>
+          <g
+            role="presentation"
+          >
+            <path
+              d="M 55.079365125649716, 41.49999999999999 
+A 0 0 0 0 0, 55.079365125649716, 41.49999999999999 
+L 55.079365125649716, 41.49999999999999 
+A 0 0 0 0 0, 55.079365125649716, 41.49999999999999 
+L 80.07936512564972, 41.49999999999999 
+A 0 0 0 0 0, 80.07936512564972, 41.49999999999999 
+L 80.07936512564972, 41.49999999999999 
+A 0 0 0 0 0, 80.07936512564972, 41.49999999999999 
+ z"
+              index="0"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 86.57142861308475, 151 
+A 0 0 0 0 0, 86.57142861308475, 151 
+L 86.57142861308475, 151 
+A 0 0 0 0 0, 86.57142861308475, 151 
+L 111.57142861308475, 151 
+A 0 0 0 0 0, 111.57142861308475, 151 
+L 111.57142861308475, 151 
+A 0 0 0 0 0, 111.57142861308475, 151 
+ z"
+              index="1"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 118.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 118.06349210051977, 114.50000000000001 
+L 118.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 118.06349210051977, 114.50000000000001 
+L 143.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 143.06349210051977, 114.50000000000001 
+L 143.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 143.06349210051977, 114.50000000000001 
+ z"
+              index="2"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 149.55555558795479, 224 
+A 0 0 0 0 1, 149.55555558795479, 224 
+L 149.55555558795479, 114.50000000000001 
+A 0 0 0 0 1, 149.55555558795479, 114.50000000000001 
+L 174.55555558795479, 114.50000000000001 
+A 0 0 0 0 1, 174.55555558795479, 114.50000000000001 
+L 174.55555558795479, 224 
+A 0 0 0 0 1, 174.55555558795479, 224 
+ z"
+              index="3"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 181.04761907538983, 5 
+A 0 0 0 0 0, 181.04761907538983, 5 
+L 181.04761907538983, 5 
+A 0 0 0 0 0, 181.04761907538983, 5 
+L 206.04761907538983, 5 
+A 0 0 0 0 0, 206.04761907538983, 5 
+L 206.04761907538983, 5 
+A 0 0 0 0 0, 206.04761907538983, 5 
+ z"
+              index="4"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 275.52380953769494, 370 
+A 0 0 0 0 0, 275.52380953769494, 370 
+L 275.52380953769494, 370 
+A 0 0 0 0 0, 275.52380953769494, 370 
+L 300.52380953769494, 370 
+A 0 0 0 0 0, 300.52380953769494, 370 
+L 300.52380953769494, 370 
+A 0 0 0 0 0, 300.52380953769494, 370 
+ z"
+              index="5"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 338.507936512565, 297 
+A 0 0 0 0 0, 338.507936512565, 297 
+L 338.507936512565, 297 
+A 0 0 0 0 0, 338.507936512565, 297 
+L 363.507936512565, 297 
+A 0 0 0 0 0, 363.507936512565, 297 
+L 363.507936512565, 297 
+A 0 0 0 0 0, 363.507936512565, 297 
+ z"
+              index="6"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+          </g>
+          <g
+            role="presentation"
+          >
+            <path
+              d="M 55.079365125649716, 41.49999999999999 
+A 0 0 0 0 0, 55.079365125649716, 41.49999999999999 
+L 55.079365125649716, 41.49999999999999 
+A 0 0 0 0 0, 55.079365125649716, 41.49999999999999 
+L 80.07936512564972, 41.49999999999999 
+A 0 0 0 0 0, 80.07936512564972, 41.49999999999999 
+L 80.07936512564972, 41.49999999999999 
+A 0 0 0 0 0, 80.07936512564972, 41.49999999999999 
+ z"
+              index="0"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 86.57142861308475, 151 
+A 0 0 0 0 0, 86.57142861308475, 151 
+L 86.57142861308475, 151 
+A 0 0 0 0 0, 86.57142861308475, 151 
+L 111.57142861308475, 151 
+A 0 0 0 0 0, 111.57142861308475, 151 
+L 111.57142861308475, 151 
+A 0 0 0 0 0, 111.57142861308475, 151 
+ z"
+              index="1"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 118.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 118.06349210051977, 114.50000000000001 
+L 118.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 118.06349210051977, 114.50000000000001 
+L 143.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 143.06349210051977, 114.50000000000001 
+L 143.06349210051977, 114.50000000000001 
+A 0 0 0 0 0, 143.06349210051977, 114.50000000000001 
+ z"
+              index="2"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 149.55555558795479, 224 
+A 0 0 0 0 0, 149.55555558795479, 224 
+L 149.55555558795479, 224 
+A 0 0 0 0 0, 149.55555558795479, 224 
+L 174.55555558795479, 224 
+A 0 0 0 0 0, 174.55555558795479, 224 
+L 174.55555558795479, 224 
+A 0 0 0 0 0, 174.55555558795479, 224 
+ z"
+              index="3"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 181.04761907538983, 151 
+A 0 0 0 0 1, 181.04761907538983, 151 
+L 181.04761907538983, 5 
+A 0 0 0 0 1, 181.04761907538983, 5 
+L 206.04761907538983, 5 
+A 0 0 0 0 1, 206.04761907538983, 5 
+L 206.04761907538983, 151 
+A 0 0 0 0 1, 206.04761907538983, 151 
+ z"
+              index="4"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 275.52380953769494, 370 
+A 0 0 0 0 0, 275.52380953769494, 370 
+L 275.52380953769494, 370 
+A 0 0 0 0 0, 275.52380953769494, 370 
+L 300.52380953769494, 370 
+A 0 0 0 0 0, 300.52380953769494, 370 
+L 300.52380953769494, 370 
+A 0 0 0 0 0, 300.52380953769494, 370 
+ z"
+              index="5"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 338.507936512565, 297 
+A 0 0 0 0 0, 338.507936512565, 297 
+L 338.507936512565, 297 
+A 0 0 0 0 0, 338.507936512565, 297 
+L 363.507936512565, 297 
+A 0 0 0 0 0, 363.507936512565, 297 
+L 363.507936512565, 297 
+A 0 0 0 0 0, 363.507936512565, 297 
+ z"
+              index="6"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+          </g>
+          <g
+            role="presentation"
+          >
+            <path
+              d="M 55.079365125649716, 187.5 
+A 0 0 0 0 1, 55.079365125649716, 187.5 
+L 55.079365125649716, 41.49999999999999 
+A 0 0 0 0 1, 55.079365125649716, 41.49999999999999 
+L 80.07936512564972, 41.49999999999999 
+A 0 0 0 0 1, 80.07936512564972, 41.49999999999999 
+L 80.07936512564972, 187.5 
+A 0 0 0 0 1, 80.07936512564972, 187.5 
+ z"
+              index="0"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 86.57142861308475, 224 
+A 0 0 0 0 1, 86.57142861308475, 224 
+L 86.57142861308475, 151 
+A 0 0 0 0 1, 86.57142861308475, 151 
+L 111.57142861308475, 151 
+A 0 0 0 0 1, 111.57142861308475, 151 
+L 111.57142861308475, 224 
+A 0 0 0 0 1, 111.57142861308475, 224 
+ z"
+              index="1"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 118.06349210051977, 260.5 
+A 0 0 0 0 1, 118.06349210051977, 260.5 
+L 118.06349210051977, 114.50000000000001 
+A 0 0 0 0 1, 118.06349210051977, 114.50000000000001 
+L 143.06349210051977, 114.50000000000001 
+A 0 0 0 0 1, 143.06349210051977, 114.50000000000001 
+L 143.06349210051977, 260.5 
+A 0 0 0 0 1, 143.06349210051977, 260.5 
+ z"
+              index="2"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 149.55555558795479, 297 
+A 0 0 0 0 1, 149.55555558795479, 297 
+L 149.55555558795479, 224 
+A 0 0 0 0 1, 149.55555558795479, 224 
+L 174.55555558795479, 224 
+A 0 0 0 0 1, 174.55555558795479, 224 
+L 174.55555558795479, 297 
+A 0 0 0 0 1, 174.55555558795479, 297 
+ z"
+              index="3"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 181.04761907538983, 224 
+A 0 0 0 0 1, 181.04761907538983, 224 
+L 181.04761907538983, 151 
+A 0 0 0 0 1, 181.04761907538983, 151 
+L 206.04761907538983, 151 
+A 0 0 0 0 1, 206.04761907538983, 151 
+L 206.04761907538983, 224 
+A 0 0 0 0 1, 206.04761907538983, 224 
+ z"
+              index="4"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 275.52380953769494, 370 
+A 0 0 0 0 0, 275.52380953769494, 370 
+L 275.52380953769494, 370 
+A 0 0 0 0 0, 275.52380953769494, 370 
+L 300.52380953769494, 370 
+A 0 0 0 0 0, 300.52380953769494, 370 
+L 300.52380953769494, 370 
+A 0 0 0 0 0, 300.52380953769494, 370 
+ z"
+              index="5"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 338.507936512565, 370 
+A 0 0 0 0 1, 338.507936512565, 370 
+L 338.507936512565, 297 
+A 0 0 0 0 1, 338.507936512565, 297 
+L 363.507936512565, 297 
+A 0 0 0 0 1, 363.507936512565, 297 
+L 363.507936512565, 370 
+A 0 0 0 0 1, 363.507936512565, 370 
+ z"
+              index="6"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+          </g>
+          <g
+            role="presentation"
+          >
+            <path
+              d="M 55.079365125649716, 224 
+A 0 0 0 0 1, 55.079365125649716, 224 
+L 55.079365125649716, 187.5 
+A 0 0 0 0 1, 55.079365125649716, 187.5 
+L 80.07936512564972, 187.5 
+A 0 0 0 0 1, 80.07936512564972, 187.5 
+L 80.07936512564972, 224 
+A 0 0 0 0 1, 80.07936512564972, 224 
+ z"
+              index="0"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 86.57142861308475, 260.5 
+A 0 0 0 0 1, 86.57142861308475, 260.5 
+L 86.57142861308475, 224 
+A 0 0 0 0 1, 86.57142861308475, 224 
+L 111.57142861308475, 224 
+A 0 0 0 0 1, 111.57142861308475, 224 
+L 111.57142861308475, 260.5 
+A 0 0 0 0 1, 111.57142861308475, 260.5 
+ z"
+              index="1"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 118.06349210051977, 297 
+A 0 0 0 0 1, 118.06349210051977, 297 
+L 118.06349210051977, 260.5 
+A 0 0 0 0 1, 118.06349210051977, 260.5 
+L 143.06349210051977, 260.5 
+A 0 0 0 0 1, 143.06349210051977, 260.5 
+L 143.06349210051977, 297 
+A 0 0 0 0 1, 143.06349210051977, 297 
+ z"
+              index="2"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 149.55555558795479, 333.5 
+A 0 0 0 0 1, 149.55555558795479, 333.5 
+L 149.55555558795479, 297 
+A 0 0 0 0 1, 149.55555558795479, 297 
+L 174.55555558795479, 297 
+A 0 0 0 0 1, 174.55555558795479, 297 
+L 174.55555558795479, 333.5 
+A 0 0 0 0 1, 174.55555558795479, 333.5 
+ z"
+              index="3"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 181.04761907538983, 297 
+A 0 0 0 0 1, 181.04761907538983, 297 
+L 181.04761907538983, 224 
+A 0 0 0 0 1, 181.04761907538983, 224 
+L 206.04761907538983, 224 
+A 0 0 0 0 1, 206.04761907538983, 224 
+L 206.04761907538983, 297 
+A 0 0 0 0 1, 206.04761907538983, 297 
+ z"
+              index="4"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 275.52380953769494, 370 
+A 0 0 0 0 0, 275.52380953769494, 370 
+L 275.52380953769494, 370 
+A 0 0 0 0 0, 275.52380953769494, 370 
+L 300.52380953769494, 370 
+A 0 0 0 0 0, 300.52380953769494, 370 
+L 300.52380953769494, 370 
+A 0 0 0 0 0, 300.52380953769494, 370 
+ z"
+              index="5"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 338.507936512565, 370 
+A 0 0 0 0 0, 338.507936512565, 370 
+L 338.507936512565, 370 
+A 0 0 0 0 0, 338.507936512565, 370 
+L 363.507936512565, 370 
+A 0 0 0 0 0, 363.507936512565, 370 
+L 363.507936512565, 370 
+A 0 0 0 0 0, 363.507936512565, 370 
+ z"
+              index="6"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+          </g>
+          <g
+            role="presentation"
+          >
+            <path
+              d="M 55.079365125649716, 370 
+A 0 0 0 0 1, 55.079365125649716, 370 
+L 55.079365125649716, 224 
+A 0 0 0 0 1, 55.079365125649716, 224 
+L 80.07936512564972, 224 
+A 0 0 0 0 1, 80.07936512564972, 224 
+L 80.07936512564972, 370 
+A 0 0 0 0 1, 80.07936512564972, 370 
+ z"
+              index="0"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 86.57142861308475, 370 
+A 0 0 0 0 1, 86.57142861308475, 370 
+L 86.57142861308475, 260.5 
+A 0 0 0 0 1, 86.57142861308475, 260.5 
+L 111.57142861308475, 260.5 
+A 0 0 0 0 1, 111.57142861308475, 260.5 
+L 111.57142861308475, 370 
+A 0 0 0 0 1, 111.57142861308475, 370 
+ z"
+              index="1"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 118.06349210051977, 370 
+A 0 0 0 0 1, 118.06349210051977, 370 
+L 118.06349210051977, 297 
+A 0 0 0 0 1, 118.06349210051977, 297 
+L 143.06349210051977, 297 
+A 0 0 0 0 1, 143.06349210051977, 297 
+L 143.06349210051977, 370 
+A 0 0 0 0 1, 143.06349210051977, 370 
+ z"
+              index="2"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 149.55555558795479, 370 
+A 0 0 0 0 1, 149.55555558795479, 370 
+L 149.55555558795479, 333.5 
+A 0 0 0 0 1, 149.55555558795479, 333.5 
+L 174.55555558795479, 333.5 
+A 0 0 0 0 1, 174.55555558795479, 333.5 
+L 174.55555558795479, 370 
+A 0 0 0 0 1, 174.55555558795479, 370 
+ z"
+              index="3"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 181.04761907538983, 370 
+A 0 0 0 0 1, 181.04761907538983, 370 
+L 181.04761907538983, 297 
+A 0 0 0 0 1, 181.04761907538983, 297 
+L 206.04761907538983, 297 
+A 0 0 0 0 1, 206.04761907538983, 297 
+L 206.04761907538983, 370 
+A 0 0 0 0 1, 206.04761907538983, 370 
+ z"
+              index="4"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 275.52380953769494, 370 
+A 0 0 0 0 0, 275.52380953769494, 370 
+L 275.52380953769494, 370 
+A 0 0 0 0 0, 275.52380953769494, 370 
+L 300.52380953769494, 370 
+A 0 0 0 0 0, 300.52380953769494, 370 
+L 300.52380953769494, 370 
+A 0 0 0 0 0, 300.52380953769494, 370 
+ z"
+              index="5"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+            <path
+              d="M 338.507936512565, 370 
+A 0 0 0 0 0, 338.507936512565, 370 
+L 338.507936512565, 370 
+A 0 0 0 0 0, 338.507936512565, 370 
+L 363.507936512565, 370 
+A 0 0 0 0 0, 363.507936512565, 370 
+L 363.507936512565, 370 
+A 0 0 0 0 0, 363.507936512565, 370 
+ z"
+              index="6"
+              role="presentation"
+              shape-rendering="auto"
+              style="cursor: pointer; padding: 8px; stroke-width: 0;"
+            />
+          </g>
+        </g>
+        <g
+          role="presentation"
+        >
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #252525; fill: transparent; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="50"
+            y1="5"
+            y2="370"
+          />
+          <g
+            role="presentation"
+          >
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-1-tickLabels-0"
+              x="39"
+              y="301.26"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="font-family: \\"SF Pro Display\\", -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \\"Helvetica Neue\\", sans-serif; font-size: 12px; letter-spacing: normal; padding: 10px; fill: #828285; stroke: transparent;"
+                text-anchor="end"
+                x="39"
+              >
+                200
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-1-tickLabels-1"
+              x="39"
+              y="228.26"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="font-family: \\"SF Pro Display\\", -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \\"Helvetica Neue\\", sans-serif; font-size: 12px; letter-spacing: normal; padding: 10px; fill: #828285; stroke: transparent;"
+                text-anchor="end"
+                x="39"
+              >
+                400
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-1-tickLabels-2"
+              x="39"
+              y="155.26"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="font-family: \\"SF Pro Display\\", -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \\"Helvetica Neue\\", sans-serif; font-size: 12px; letter-spacing: normal; padding: 10px; fill: #828285; stroke: transparent;"
+                text-anchor="end"
+                x="39"
+              >
+                600
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-1-tickLabels-3"
+              x="39"
+              y="82.25999999999999"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="font-family: \\"SF Pro Display\\", -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \\"Helvetica Neue\\", sans-serif; font-size: 12px; letter-spacing: normal; padding: 10px; fill: #828285; stroke: transparent;"
+                text-anchor="end"
+                x="39"
+              >
+                800
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-1-tickLabels-4"
+              x="39"
+              y="9.26"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="font-family: \\"SF Pro Display\\", -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \\"Helvetica Neue\\", sans-serif; font-size: 12px; letter-spacing: normal; padding: 10px; fill: #828285; stroke: transparent;"
+                text-anchor="end"
+                x="39"
+              >
+                1K
+              </tspan>
+            </text>
+          </g>
+        </g>
+        <g
+          role="presentation"
+        >
+          <line
+            role="presentation"
+            shape-rendering="auto"
+            style="stroke: #252525; fill: transparent; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round;"
+            vector-effect="non-scaling-stroke"
+            x1="50"
+            x2="370"
+            y1="370"
+            y2="370"
+          />
+          <g
+            role="presentation"
+          >
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-2-tickLabels-0"
+              x="55.079365125649716"
+              y="391.26"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="font-family: \\"SF Pro Display\\", -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \\"Helvetica Neue\\", sans-serif; font-size: 12px; letter-spacing: normal; padding: 10px; fill: #828285; stroke: transparent;"
+                text-anchor="middle"
+                x="55.079365125649716"
+              >
+                01/01
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-2-tickLabels-1"
+              x="118.06349210051977"
+              y="391.26"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="font-family: \\"SF Pro Display\\", -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \\"Helvetica Neue\\", sans-serif; font-size: 12px; letter-spacing: normal; padding: 10px; fill: #828285; stroke: transparent;"
+                text-anchor="middle"
+                x="118.06349210051977"
+              >
+                01/03
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-2-tickLabels-2"
+              x="181.04761907538983"
+              y="391.26"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="font-family: \\"SF Pro Display\\", -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \\"Helvetica Neue\\", sans-serif; font-size: 12px; letter-spacing: normal; padding: 10px; fill: #828285; stroke: transparent;"
+                text-anchor="middle"
+                x="181.04761907538983"
+              >
+                01/05
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-2-tickLabels-3"
+              x="244.03174605025987"
+              y="391.26"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="font-family: \\"SF Pro Display\\", -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \\"Helvetica Neue\\", sans-serif; font-size: 12px; letter-spacing: normal; padding: 10px; fill: #828285; stroke: transparent;"
+                text-anchor="middle"
+                x="244.03174605025987"
+              >
+                01/07
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-2-tickLabels-4"
+              x="307.01587302512996"
+              y="391.26"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="font-family: \\"SF Pro Display\\", -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \\"Helvetica Neue\\", sans-serif; font-size: 12px; letter-spacing: normal; padding: 10px; fill: #828285; stroke: transparent;"
+                text-anchor="middle"
+                x="307.01587302512996"
+              >
+                01/09
+              </tspan>
+            </text>
+          </g>
+          <g
+            role="presentation"
+          >
+            <text
+              direction="inherit"
+              dx="0"
+              id="chart-axis-2-tickLabels-5"
+              x="370"
+              y="391.26"
+            >
+              <tspan
+                dx="0"
+                dy="0"
+                style="font-family: \\"SF Pro Display\\", -apple-system, BlinkMacSystemFont, \\"Segoe UI\\", Roboto, Oxygen-Sans, Ubuntu, Cantarell, \\"Helvetica Neue\\", sans-serif; font-size: 12px; letter-spacing: normal; padding: 10px; fill: #828285; stroke: transparent;"
+                text-anchor="middle"
+                x="370"
+              >
+                01/11
+              </tspan>
+            </text>
+          </g>
+        </g>
+      </svg>
+      <div
+        style="z-index: 99; position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"
+      >
+        <svg
+          height="400"
+          style="overflow: visible; width: 100%; height: 100%;"
+          viewBox="0 0 400 400"
+          width="400"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

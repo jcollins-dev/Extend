@@ -1,0 +1,8 @@
+to convert raw data to chart data:
+convertToChartData(data, groupKey)
+
+to generate chart categories:
+generateCategoriesArray(data, itemKey)
+
+tp convert to stacked chart data
+convertToStackedChartData(data, groupKey, itemKey)

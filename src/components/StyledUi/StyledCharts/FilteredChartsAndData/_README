@@ -1,0 +1,35 @@
+HOW TO USE FilteredChartsAndData:
+This document will outline the step-by-step instructions on how to use this component.
+
+
+Component Can Be Found At:
+This component is currently being used as the alarms page view for machines, but can be used for any page that takes api
+call and groups the data (examples:  Recipes, Alerts, Alarms, ...any data that is grouped by 2 keys [id and date, or type and date])
+
+
+Component Description:
+This component takes an api call, formats the data, adds search and filter functionality, provides current filters and processed data then displays the data on a single page or container using a collection of Ui Elements made for Extend (OmniBlu).  
+
+
+Shared Functionality:
+This component is wrapped with a few providers to avoid passing props to children, the contexts are outlined below
+
+1. Data Provider:  - The processed data that is provided to the wrapper is passed down.  
+The data provider expects data, isLoading, hasMessage, hasError
+Provider: 
+<UseDataProvider {...{data, isLoading, hasError, hasMessage }} />
+To Use:
+const { data, isLoading, hasError, hasMessage} = useData() - returns { data?: Record<string, unknown>, isLoading?: boolean, hasMessage?: string, hasError?: string }
+
+2. Selected Items to Filter:
+This component is also wrapped in a provider that sends the currently selected items along with handlers and states (for state history buttons)
+Provider: <FilterSelectedProvider />
+To Use: const [selected, handleSelect] = useFilterSelected()
+
+UI Copmonents Will Display:
+- Styled Pie Chart
+- Styled Stacked Bar Chart
+- Styled Pie Chart With Legend
+- Search Box to filter data
+- Download CSV button
+- Redo / Undo / Clear buttons

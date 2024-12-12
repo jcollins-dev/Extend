@@ -1,0 +1,54 @@
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { SitePageLayout } from '../SitePageLayout';
+
+import { routerTabsDemoData } from 'components/StyledUi/RouterTabNav/demo/routerTabsDemoData';
+import { fleetBreadCrumbsDemoSettings } from 'components/StyledUi/FleetBreadCrumbs/demo/fleetBreadCrumbsDemoSettings';
+import { machineDetailsBarDemoSettings } from 'components/StyledUi/MachineDetailsBar/demo/machineDetailsBarDemoSettings';
+
+export default {
+  title: 'StyledUi/Layouts/SitePageLayout'
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+} as ComponentMeta<typeof SitePageLayout>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof SitePageLayout> = (args) => {
+  return <SitePageLayout {...args} />;
+};
+
+export const Demo = Template.bind({});
+Demo.args = {
+  mainTabs: routerTabsDemoData,
+  basePath: `demo/base-path`,
+  breadCrumbs: fleetBreadCrumbsDemoSettings,
+  machineDetailsBar: machineDetailsBarDemoSettings,
+  children: `site page layout container demo`
+};
+
+export const NoMachineDetails = Template.bind({});
+NoMachineDetails.args = {
+  mainTabs: routerTabsDemoData,
+  basePath: `demo/base-path`,
+  breadCrumbs: fleetBreadCrumbsDemoSettings,
+  children: `site page layout container demo without machine details`
+};
+
+export const NoTabs = Template.bind({});
+NoTabs.args = {
+  breadCrumbs: fleetBreadCrumbsDemoSettings,
+  machineDetailsBar: machineDetailsBarDemoSettings,
+  children: `site page layout container demo with no tabs`
+};
+
+export const NoHeader = Template.bind({});
+NoHeader.args = {
+  mainTabs: routerTabsDemoData,
+  basePath: `demo/base-path`,
+  children: `site page layout container demo with no header`
+};
+
+export const PageTitleOnly = Template.bind({});
+PageTitleOnly.args = {
+  PageTitle: `Demo Page Headline`,
+  children: `site page layout container demo with just a page title`
+};

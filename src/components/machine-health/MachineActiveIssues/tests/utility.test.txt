@@ -1,0 +1,98 @@
+import React from 'react';
+import { DATA } from './testdata.js';
+import { filterGivenDataByKeyValue } from '../utils';
+
+const TESTDATA = [
+  {
+    id: '6e2b0a9b-278e-487b-9152-77702e215c2c',
+    machineId: '27d9fa8c-e51c-46a8-b713-5954dce3a034',
+    alertConfigurationId: '2f6bc820-c0a7-4a54-950a-6dd0f1653bca',
+    triggerRule: 'threshold',
+    description: 'testval2',
+    importance: 'high',
+    severity: 'orange',
+    machineState: 'Production',
+    startTimestamp: '2023-06-07T11:20:21+00:00',
+    active: true
+  },
+  {
+    id: '89a4e3d4-17cc-428d-9f4b-8ee451e00bc5',
+    machineId: '27d9fa8c-e51c-46a8-b713-5954dce3a034',
+    alertConfigurationId: '4eceec59-8634-4390-8110-200b9f8189d3',
+    triggerRule: 'threshold',
+    description: 'test',
+    importance: 'medium',
+    severity: 'orange',
+    machineState: 'Production',
+    startTimestamp: '2023-06-07T11:20:21+00:00',
+    active: true
+  },
+  {
+    id: 'b7802a60-bb89-482d-99f3-08d01d8785e2',
+    machineId: '27d9fa8c-e51c-46a8-b713-5954dce3a034',
+    alertConfigurationId: 'effcb63b-1894-4379-be9d-17bab6b6b802',
+    triggerRule: 'threshold',
+    description: 'testAlertVal',
+    importance: 'high',
+    severity: 'red',
+    machineState: 'Production',
+    startTimestamp: '2023-06-07T11:20:21+00:00',
+    active: true
+  },
+  {
+    id: 'cce93f98-e04b-4688-bba7-5e8c81bb5313',
+    machineId: '27d9fa8c-e51c-46a8-b713-5954dce3a034',
+    alertConfigurationId: '5ebb80d1-dcd5-43fe-9b22-6b5930297f9e',
+    triggerRule: 'set_point',
+    description: 'test',
+    importance: 'low',
+    severity: 'red',
+    machineState: 'Production',
+    startTimestamp: '2023-06-07T11:20:29+00:00',
+    active: true
+  }
+];
+
+describe('does filter work', () => {
+  it('it WORKS', () => {
+    const filter = {
+      severity: ['red']
+    };
+
+    const result = filterGivenDataByKeyValue(TESTDATA, filter);
+    expect(result).toEqual([
+      {
+        id: 'b7802a60-bb89-482d-99f3-08d01d8785e2',
+        machineId: '27d9fa8c-e51c-46a8-b713-5954dce3a034',
+        alertConfigurationId: 'effcb63b-1894-4379-be9d-17bab6b6b802',
+        triggerRule: 'threshold',
+        description: 'testAlertVal',
+        importance: 'high',
+        severity: 'red',
+        machineState: 'Production',
+        startTimestamp: '2023-06-07T11:20:21+00:00',
+        active: true
+      },
+      {
+        id: 'cce93f98-e04b-4688-bba7-5e8c81bb5313',
+        machineId: '27d9fa8c-e51c-46a8-b713-5954dce3a034',
+        alertConfigurationId: '5ebb80d1-dcd5-43fe-9b22-6b5930297f9e',
+        triggerRule: 'set_point',
+        description: 'test',
+        importance: 'low',
+        severity: 'red',
+        machineState: 'Production',
+        startTimestamp: '2023-06-07T11:20:29+00:00',
+        active: true
+      }
+    ]);
+  });
+
+  it('Large Dataset', () => {
+    const filter = {
+      log_type: ['LOG']
+    };
+    const result = filterGivenDataByKeyValue(DATA, filter);
+    expect(result).toBeTruthy();
+  });
+});

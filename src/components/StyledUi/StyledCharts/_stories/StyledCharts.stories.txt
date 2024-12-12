@@ -1,0 +1,126 @@
+import React from 'react';
+import styled from 'styled-components';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+
+import { demoAlarmsData } from './demoAlarmData';
+import { useGetAvureAlarmsQueryDemoData } from 'components/StyledUi/demoData/avureAlarmsQueryDemoData';
+import { dsiAlarmsDemoData } from 'components/StyledUi/demoData/dsiAlarmsDemoData';
+import { processApiData } from 'components/StyledUi/js';
+import { StyledPieChart } from '../StyledPieChart/StyledPieChart';
+import { StyledStackedBarChart } from '../StyledBarChart/StyledBarChart';
+import { FilterSelectedProvider } from 'components/StyledUi/FilterSelected';
+
+// convert the api date to a standard format
+const processedApiData = processApiData(useGetAvureAlarmsQueryDemoData, {
+  startTimeKey: 'startTimestamp',
+  endTimeKey: 'endTimestamp',
+  addDateAsKey: 'date',
+  addDurationAsKey: 'duration'
+});
+
+const DemoContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  width: 100%;
+  height: 500px;
+  gap: 1em;
+
+  div {
+    height: 250px;
+  }
+`;
+
+export default {
+  title: 'StyledUi/StyledCharts/Charts2'
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+} as ComponentMeta<typeof StyledPieChart>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof DemoContainer> = () => {
+  const pieChartSettings = {
+    groupKey: 'type',
+    type: 'pie',
+    autoLegend: true,
+    apiData: {
+      data: processedApiData
+    },
+    colorScale: 'qualitative',
+    setsColors: true,
+    format: {
+      tooltip: (datum?: Record<string, unknown>): string =>
+        // for dsi: `Alarm Type ${datum?.logType}: ${datum?.y}%`,
+        `Alarm Type ${datum?.type}: ${datum?.y}%`,
+      legendItem: (datum?: Record<string, unknown>): string => `Alarm Type ${datum?.label}`
+    },
+    widgetUiSettings: {
+      title: 'Alarms by Type'
+    }
+  };
+
+  const pieChartById = {
+    groupKey: 'code',
+    type: 'pie',
+    setsColors: true,
+    apiData: {
+      data: processedApiData
+    },
+    filteredByKeys: ['type'],
+    format: {
+      tooltip: (datum?: Record<string, unknown>): string =>
+        // for dsi: `Alarm ID: ${datum?.senderId}\nCount: ${datum?.count}`
+        `Alarm ID: ${datum?.id}\nCount: ${datum?.count}`
+    },
+    widgetUiSettings: {
+      title: 'Alarms by ID'
+    }
+  };
+
+  const barChartSettings = {
+    groupKey: 'type',
+    type: 'stacked-bar',
+    categoryKey: 'date',
+    apiData: {
+      data: processedApiData
+    },
+    filteredByKeys: ['type', 'code'],
+    format: {
+      tooltip: (datum?: Record<string, unknown>): string => {
+        // for dsi: `Alarm Type ${datum?.logType}\nAlarm ID: ${datum?.senderId}\nCount: ${datum?.y}`;
+        return `Alarm Type ${datum?.type}\nAlarm ID: ${datum?.id}\nCount: ${datum?.y}`;
+      },
+      axisX: (label: string): string => `${label}`,
+      axisY: (label: string): string => {
+        label = String(label).slice(5);
+        const [m, d] = label.split('-');
+        //console.log({ d: Number(split?.[0]), m: split?.[1] })
+        return `${Number(m)}/${d}`;
+      }
+    },
+    widgetUiSettings: {
+      title: 'Alarms by Date'
+    }
+  };
+
+  const charts = [barChartSettings, pieChartById, pieChartSettings];
+
+  return (
+    <FilterSelectedProvider>
+      <DemoContainer>
+        {charts.map((chart, i) => {
+          const { type, ...chartSettings } = chart;
+          if (type === 'pie')
+            return (
+              <div key={`pie-${i}`}>
+                <StyledPieChart {...chartSettings} />
+              </div>
+            );
+          else if (type === 'stacked-bar')
+            return <StyledStackedBarChart {...chartSettings} key={`stack-${i}`} />;
+          return <></>;
+        })}
+      </DemoContainer>
+    </FilterSelectedProvider>
+  );
+};
+
+export const StyledChartsDemo = Template.bind({});

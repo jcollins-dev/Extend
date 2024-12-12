@@ -1,0 +1,115 @@
+trigger:
+  - $(env)
+variables:
+  - group: veracode-credentials
+  - group: api-urls
+  - group: google-analytics
+  - group: azure-b2c
+  - group: static-web-app
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+  - job: Deploy
+    steps:
+      - checkout: self
+        submodules: true
+
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '16.x'
+      - task: AzureKeyVault@2
+        inputs:
+          azureSubscription: '$(service_connection)'
+          KeyVaultName: $(kv_name)
+          SecretsFilter: '*'
+          RunAsPreJob: false
+
+      - script: |
+          yarn install
+          CI=true npm run build
+        displayName: 'Build for PR validation'
+
+      - script: CI=true yarn test -u --ci=true --changedSince=origin/develop
+        condition: eq(variables.env,'prvalidation')
+        displayName: 'Run tests for PR validation'
+
+      - script: |
+          yarn install
+          CI=true yarn test-coverage-report --ci=true
+        displayName: 'Run tests with coverage report'
+        condition: eq(variables.run_tests_coverage_report, true)
+
+      - task: PublishTestResults@2
+        displayName: 'Publish Test Results'
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: 'junit.xml'
+          mergeTestResults: true
+        condition: and(succeededOrFailed(), eq(variables.run_tests_coverage_report, true))
+
+      - task: PublishCodeCoverageResults@1
+        displayName: 'Publish code coverage'
+        inputs:
+          codeCoverageTool: Cobertura
+          summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml'
+          reportDirectory: '$(System.DefaultWorkingDirectory)/coverage'
+          failIfCoverageEmpty: false
+        condition: and(succeededOrFailed(), eq(variables.run_tests_coverage_report, true))
+
+      - task: AzureStaticWebApp@0
+        condition: eq(variables.env,'develop')
+        displayName: 'Build and deploy to DEV'
+        inputs:
+          app_location: '/'
+          output_location: 'build'
+          app_build_command: 'REACT_APP_API_BASE=$(dev_api_url) REACT_APP_GOOGLE_MAPS_API_KEY=$(googlemaps-api-key-dev) REACT_APP_ENABLE_GOOGLE_ANALYTICS=$(google_analytics_enabled) REACT_APP_GOOGLE_ANALYTICS_MEASUREMENT_ID=$(google_analytics_measurement_id_dev) REACT_APP_ENABLE_B2C=$(dev_enable_b2c) REACT_APP_B2C_CLIENT_ID=$(dev_b2c_client_id) REACT_APP_B2C_AUTHORITY_DOMAIN=$(dev_b2c_authority_domain) REACT_APP_B2C_SIGNUPSIGNIN_POLICY=$(b2c_signup_signin_policy) REACT_APP_B2C_FORGOTPASSWORD_POLICY=$(b2c_forget_password_policy) REACT_APP_B2C_EDITPROFILE_POLICY=$(b2c_edit_profile_policy) REACT_APP_B2C_SIGNUPSIGNIN=$(dev_b2c_signup_signin) REACT_APP_B2C_FORGOTPASSWORD=$(dev_b2c_forget_password) REACT_APP_B2C_EDITPROFILE=$(dev_b2c_edit_profile) REACT_APP_B2C_REDIRECT_URI=$(dev_b2c_redirect_uri) REACT_APP_B2C_API_SCOPE_READ=$(dev_b2c_api_scope_read) REACT_APP_ENABLE_SF=$(dev_enable_sf) REACT_APP_ENABLE_ADMIN_PORTAL=$(dev_enable_admin_portal) REACT_APP_LINE_VIEW_FEATURE=$(dev_line_view) REACT_APP_ALERT_CREATOR=$(dev_alert_creator) REACT_APP_SIDENAV_ENABLE_ORG_LEVEL=$(dev_sidenav_enable_org_level) REACT_APP_CROWDIN_INTEGRATION=$(dev_crowdin_integration) REACT_APP_CROWDIN_DISTRIBUTION_HASH=$(crowdin-distribution-hash-dev) REACT_APP_ALERT_CREATOR_MULTI_CONDITION=$(multi-condition-alert-dev) REACT_APP_ALERT_CREATOR_SUPPORTED_TRIGGERS=$(alert-triggers-dev) REACT_APP_NAV_VERSION=$(nav-version-dev) REACT_APP_ENABLE_ALERTS_TAB=$(dev-alerts-tab) REACT_APP_HEADER_COLOR=$(dev-header-color) REACT_APP_ENABLE_PASCAL_HEALTH_ISSUES_WIDGET=$(dev-pascal-issues-widget) npm run build'
+          azure_static_web_apps_api_token: '$(deployment_token)'
+          verbose: true
+
+      - task: AzureStaticWebApp@0
+        condition: eq(variables.env,'qa')
+        displayName: 'Build and deploy to QA'
+        inputs:
+          app_location: '/'
+          output_location: 'build'
+          app_build_command: 'REACT_APP_API_BASE=$(qa_api_url) REACT_APP_GOOGLE_MAPS_API_KEY=$(googlemaps-api-key-qa) REACT_APP_ENABLE_GOOGLE_ANALYTICS=$(google_analytics_enabled) REACT_APP_GOOGLE_ANALYTICS_MEASUREMENT_ID=$(google_analytics_measurement_id_qa) REACT_APP_ENABLE_B2C=$(qa_enable_b2c) REACT_APP_B2C_CLIENT_ID=$(qa_b2c_client_id) REACT_APP_B2C_AUTHORITY_DOMAIN=$(qa_b2c_authority_domain) REACT_APP_B2C_SIGNUPSIGNIN_POLICY=$(b2c_signup_signin_policy) REACT_APP_B2C_FORGOTPASSWORD_POLICY=$(b2c_forget_password_policy) REACT_APP_B2C_EDITPROFILE_POLICY=$(b2c_edit_profile_policy) REACT_APP_B2C_SIGNUPSIGNIN=$(qa_b2c_signup_signin) REACT_APP_B2C_FORGOTPASSWORD=$(qa_b2c_forget_password) REACT_APP_B2C_EDITPROFILE=$(qa_b2c_edit_profile) REACT_APP_B2C_REDIRECT_URI=$(qa_b2c_redirect_uri) REACT_APP_B2C_API_SCOPE_READ=$(qa_b2c_api_scope_read) REACT_APP_ENABLE_SF=$(qa_enable_sf) REACT_APP_ENABLE_ADMIN_PORTAL=$(qa_enable_admin_portal) REACT_APP_LINE_VIEW_FEATURE=$(qa_line_view) REACT_APP_ALERT_CREATOR=$(qa_alert_creator) REACT_APP_SIDENAV_ENABLE_ORG_LEVEL=$(qa_sidenav_enable_org_level) REACT_APP_CROWDIN_INTEGRATION=$(qa_crowdin_integration) REACT_APP_CROWDIN_DISTRIBUTION_HASH=$(crowdin-distribution-hash-qa) REACT_APP_ALERT_CREATOR_MULTI_CONDITION=$(multi-condition-alert-qa) REACT_APP_ALERT_CREATOR_SUPPORTED_TRIGGERS=$(alert-triggers-qa) REACT_APP_NAV_VERSION=$(nav-version-qa) REACT_APP_ENABLE_ALERTS_TAB=$(qa-alerts-tab) REACT_APP_HEADER_COLOR=$(qa-header-color) REACT_APP_ENABLE_PASCAL_HEALTH_ISSUES_WIDGET=$(qa-pascal-issues-widget) npm run build'
+          azure_static_web_apps_api_token: $(deployment_token)
+
+      - task: AzureStaticWebApp@0
+        condition: eq(variables.env,'prod')
+        displayName: 'Build PROD'
+        inputs:
+          app_location: '/'
+          app_build_command: 'REACT_APP_API_BASE=$(prod_api_url) REACT_APP_GOOGLE_MAPS_API_KEY=$(googlemaps-api-key-prod) REACT_APP_ENABLE_GOOGLE_ANALYTICS=$(google_analytics_enabled) REACT_APP_GOOGLE_ANALYTICS_MEASUREMENT_ID=$(google_analytics_measurement_id_prod) REACT_APP_ENABLE_B2C=$(prod_enable_b2c) REACT_APP_B2C_CLIENT_ID=$(prod_b2c_client_id) REACT_APP_B2C_AUTHORITY_DOMAIN=$(prod_b2c_authority_domain) REACT_APP_B2C_SIGNUPSIGNIN_POLICY=$(b2c_signup_signin_policy) REACT_APP_B2C_FORGOTPASSWORD_POLICY=$(b2c_forget_password_policy) REACT_APP_B2C_EDITPROFILE_POLICY=$(b2c_edit_profile_policy) REACT_APP_B2C_SIGNUPSIGNIN=$(prod_b2c_signup_signin) REACT_APP_B2C_FORGOTPASSWORD=$(prod_b2c_forget_password) REACT_APP_B2C_EDITPROFILE=$(prod_b2c_edit_profile) REACT_APP_B2C_REDIRECT_URI=$(prod_b2c_redirect_uri) REACT_APP_B2C_API_SCOPE_READ=$(prod_b2c_api_scope_read) REACT_APP_ENABLE_SF=$(prod_enable_sf) REACT_APP_ENABLE_ADMIN_PORTAL=$(prod_enable_admin_portal) REACT_APP_LINE_VIEW_FEATURE=$(prod_line_view) REACT_APP_ALERT_CREATOR=$(prod_alert_creator) REACT_APP_SIDENAV_ENABLE_ORG_LEVEL=$(prod_sidenav_enable_org_level) REACT_APP_CROWDIN_INTEGRATION=$(prod_crowdin_integration) REACT_APP_CROWDIN_DISTRIBUTION_HASH=$(crowdin-distribution-hash-prod) REACT_APP_ALERT_CREATOR_MULTI_CONDITION=$(multi-condition-alert-prod) REACT_APP_ALERT_CREATOR_SUPPORTED_TRIGGERS=$(alert-triggers-prod) REACT_APP_NAV_VERSION=$(nav-version-prod) REACT_APP_ENABLE_ALERTS_TAB=$(prod-alerts-tab) REACT_APP_ENABLE_PASCAL_HEALTH_ISSUES_WIDGET=$(prod-pascal-issues-widget)  npm run build'
+          output_location: 'build'
+          verbose: true
+          azure_static_web_apps_api_token: '$(deployment_token)'
+
+  - job: Veracode
+    condition: and(ne(variables.env,'prvalidation'), eq(variables.env,'qa'))
+    dependsOn: Deploy
+    steps:
+      - task: CmdLine@2
+        displayName: 'Create Veracode ZIP'
+        inputs:
+          script: |
+            echo Creating zip for Veracode...
+            git archive --format=zip -o $(build.buildNumber)-veracode-zip.zip HEAD
+
+      - task: Veracode@3
+        displayName: 'Run Veracode Scan (Frontend, QA)'
+        inputs:
+          ConnectionDetailsSelection: 'Credentials'
+          apiId: $(veracode_api_id)
+          apiKey: $(veracode_api_key)
+          veracodeAppProfile: 'Project Extend'
+          version: '$(build.buildNumber)-$(system.jobId)'
+          filepath: './$(build.buildNumber)-veracode-zip.zip'
+          sandboxName: 'extend-ui-qa'
+          failBuildIfUploadAndScanBuildStepFails: true
+          importResults: true
+          maximumWaitTime: '30'
+        timeoutInMinutes: 35
+        retryCountOnTaskFailure: 1

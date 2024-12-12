@@ -1,0 +1,29 @@
+import React from 'react';
+import { PageGrid } from '../PageGrid';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { PageDemoDSIProduction } from './PageGridDSIProduction.demo';
+
+const baseGap = `.3em`;
+
+export default {
+  title: 'Ui/Pages/DSI',
+  component: PageGrid
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+} as ComponentMeta<typeof PageGrid>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof PageGrid> = (args) => {
+  /** for demo only */
+  return (
+    <PageGrid {...args}>
+      <PageDemoDSIProduction />
+    </PageGrid>
+  );
+};
+
+export const DSIProduct = Template.bind({});
+DSIProduct.args = {
+  gridRows: 'auto auto auto auto',
+  gridCols: '1fr',
+  gridGap: baseGap
+};

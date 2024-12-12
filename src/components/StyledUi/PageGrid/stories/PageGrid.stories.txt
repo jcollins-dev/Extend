@@ -1,0 +1,141 @@
+import React from 'react';
+import { PageGrid } from 'components';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import styled from 'styled-components';
+
+export default {
+  title: 'StyledUi/PageGrid',
+  component: PageGrid
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+} as ComponentMeta<typeof PageGrid>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof PageGrid> = (args) => {
+  /** for demo only */
+  return <PageGrid {...args} gridGap="1em" />;
+};
+
+interface GaProps {
+  ga: string;
+}
+
+const GridComponent = ({ ga }: { ga: string }): JSX.Element => (
+  <GridDiv {...{ ga }}>grid-area: {ga};</GridDiv>
+);
+const GridDiv = styled.div<GaProps>`
+  grid-area: ${({ ga }) => ga};
+  min-height: 20vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.h3 {
+    background-color: transparent !important;
+    min-height: initial;
+    margin: 0;
+    color: red;
+    border-bottom: solid 1px red;
+  }
+`;
+
+export const FixedLeft = Template.bind({});
+FixedLeft.args = {
+  gridType: 'fixedLeft',
+  children: (
+    <>
+      <GridComponent ga="left" />
+      <GridComponent ga="right" />
+    </>
+  )
+};
+
+export const SplitWithTitle = Template.bind({});
+SplitWithTitle.args = {
+  gridType: 'splitWithTitle',
+  children: (
+    <>
+      <GridDiv ga="title" as="h3" className="h3">
+        ga: title
+      </GridDiv>
+      <GridDiv ga="cell-1">ga: cell-1</GridDiv>
+      <GridDiv ga="cell-2">ga: cell-2</GridDiv>
+    </>
+  )
+};
+
+export const SettingsQualityPerformance = Template.bind({});
+SettingsQualityPerformance.args = {
+  gridType: 'settingsQaulityPerfomance',
+  children: (
+    <>
+      <GridDiv ga="settings" as="h3" className="h3">
+        ga: settings
+      </GridDiv>
+      <GridDiv ga="settings-1">ga: settings-1</GridDiv>
+      <GridDiv ga="settings-2">ga: settings-2</GridDiv>
+      <GridDiv ga="quality" as="h3" className="h3">
+        ga: quality
+      </GridDiv>
+      <GridDiv ga="quality-1">ga: quality-1</GridDiv>
+      <GridDiv ga="quality-2">ga: quality-2</GridDiv>
+      <GridDiv ga="quality-3">ga: quality-3</GridDiv>
+      <GridDiv ga="quality-4">ga: quality-4</GridDiv>
+    </>
+  )
+};
+
+export const Overview2Col = Template.bind({});
+Overview2Col.args = {
+  gridType: 'overview2Col',
+  children: (
+    <>
+      <GridDiv ga="machine">ga: machine</GridDiv>
+      <GridDiv ga="cell-1">ga: cell-1</GridDiv>
+      <GridDiv ga="cell-2">ga: cell-2</GridDiv>
+    </>
+  )
+};
+
+export const CustomGrid = Template.bind({});
+CustomGrid.args = {
+  gridCols: `1fr`,
+  gridRows: `auto auto auto auto auto`,
+  gridAreas: `
+    'c1'
+    'c2'
+    'c3'
+    'c4'
+    'c5'
+  `,
+  mediaBreaks: {
+    md: {
+      gridCols: `1fr 1fr`,
+      gridRows: `auto auto auto`,
+      gridAreas: `
+        'c1 c2'
+        'c3 c3'
+        'c4 c5'
+      `
+    },
+    lg: {
+      gridCols: `1fr 1fr 1fr`,
+      gridRows: `auto auto auto`,
+      gridAreas: `
+        'c1 c2 c3'
+        'c4 c4 c3'
+        'c5 c5 c5' 
+      `
+    }
+  },
+  children: (
+    <>
+      <GridComponent ga="c1" />
+      <GridComponent ga="c2" />
+      <GridComponent ga="c3" />
+      <GridComponent ga="c4" />
+      <GridComponent ga="c5" />
+    </>
+  )
+};

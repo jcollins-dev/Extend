@@ -1,0 +1,192 @@
+import React, { useRef, useEffect } from 'react';
+import * as d3 from 'd3';
+import { LineChartContainer } from './LineChart.elements';
+import { parseISO, format } from 'date-fns';
+import { BottomAxis } from './BottomAxis';
+
+export type LineChartProps = {
+  data?: Record<string, unknown>[];
+  groupKey?: string,
+  valueKey?: string,
+  xKey?: string,
+  yKey?: string,
+  zKey?: string,
+  tickFormat?: (date: string) => string;
+};
+
+
+export const LineChart: React.FC<LineChartProps> = ({ data, groupKey, valueKey, xKey, yKey }): JSX.Element => {
+
+  groupKey = groupKey || xKey || 'date'
+  valueKey = valueKey || yKey || 'value'
+
+  const tickFormat = (x: Date) => {
+    return format(x, 'MM/dd/yyyy')
+  }
+
+  if (!data) return <>missing data props</>;
+
+  // Define custom tick values for x-axis
+  const customYAxisTicks = [0, 20, 40, 60, 80, 100];
+
+  // Define custom tick values for y-axis
+  const customXAxisTicks = data.map((item: Record<string, unknown>) => {
+    return item[String(groupKey)] as Date
+  }).sort()
+
+
+  console.log({ customXAxisTicks, customYAxisTicks })
+
+  const svgRef = useRef<SVGSVGElement | null>(null);
+
+
+
+  useEffect(() => {
+    if (!svgRef.current) return;
+
+    // Set up dimensions
+    const margin = { top: 20, right: 30, bottom: 40, left: 50 };
+    const width = svgRef.current.clientWidth - margin.left - margin.right;
+    const height = svgRef.current.clientHeight - margin.top - margin.bottom;
+
+    const svg = d3.select(svgRef.current);
+
+    // Create scales for x and y axes
+    const xScale = d3
+      .scaleTime()
+      .domain(data.map((d) => d.date as Date))
+      .range([0, width]);
+
+    const yScale = d3
+      .scaleLinear()
+      .domain([0, 100]) // Adjust the domain based on your data
+      .nice()
+      .range([height, 0]);
+
+    // Render the x-axis
+
+    const axis = d3
+      .axisBottom(xScale)
+      //.ticks(5) // You can adjust the number of ticks as needed
+      .tickFormat(d => tickFormat(d as Date));
+
+    svg
+      .append('g')
+      .attr('transform', `translate(${margin.left},${height + margin.top})`)
+      .call(axis);
+
+
+
+    // Render the y-axis
+    svg
+      .append('g')
+      .attr('transform', `translate(${margin.left},${margin.top})`)
+      .call(d3.axisLeft(yScale).tickValues([0, 20, 40, 60, 80, 100]));
+
+    // Create a line generator function
+    const line = d3
+      .line<Record<string, unknown>>()
+      .x((d) => xScale(d.date as Date) || 0)
+      .y((d) => yScale(d.value as number) || 0)
+
+    // Render the line chart
+    svg
+      .append('path')
+      .datum(data)
+      .attr('fill', 'none')
+      .attr('stroke', 'blue') // You can customize the line color here
+      .attr('stroke-width', 2)
+      .attr('d', line)
+      .attr('transform', `translate(${margin.left},${margin.top})`);
+  }, [data]);
+
+  return (
+    <div>
+      <LineChartContainer ref={svgRef}></LineChartContainer>
+    </div>
+  );
+};
+
+
+
+export const LineChart2: React.FC<LineChartProps> = ({ data, groupKey, valueKey }): JSX.Element => {
+
+  groupKey = groupKey || 'date'
+  valueKey = valueKey || 'value'
+
+  if (!data) return <>missing data props</>;
+
+  // Define custom tick values for x-axis
+  const customYAxisTicks = [0, 20, 40, 60, 80, 100];
+
+  // Define custom tick values for y-axis
+  const customXAxisTicks = data.map((item: Record<string, unknown>) => {
+    return item[groupKey] as Date
+  }).sort()
+
+
+  console.log({ customXAxisTicks, customYAxisTicks })
+
+  const svgRef = useRef<SVGSVGElement | null>(null);
+
+
+
+  useEffect(() => {
+    if (!svgRef.current) return;
+
+    // Set up dimensions
+    const margin = { top: 20, right: 30, bottom: 40, left: 50 };
+    const width = svgRef.current.clientWidth - margin.left - margin.right;
+    const height = svgRef.current.clientHeight - margin.top - margin.bottom;
+
+    const svg = d3.select(svgRef.current);
+
+    // Create scales for x and y axes
+    const xScale = d3
+      .scaleTime()
+      .domain(data.map((d) => d.date as Date))
+      .range([0, width]);
+
+    const yScale = d3
+      .scaleLinear()
+      .domain([0, 100]) // Adjust the domain based on your data
+      .nice()
+      .range([height, 0]);
+
+    // Render the x-axis
+    svg
+      .append('g')
+      .attr('transform', `translate(${margin.left},${height + margin.top})`)
+      .call(d3.axisBottom(xScale).tickValues(data.map((d) => d.date as Date)));
+
+    // Render the y-axis
+    svg
+      .append('g')
+      .attr('transform', `translate(${margin.left},${margin.top})`)
+      .call(d3.axisLeft(yScale).tickValues([0, 20, 40, 60, 80, 100]));
+
+    // Create a line generator function
+    const line = d3
+      .line<Record<string, unknown>>()
+      .x((d) => xScale(d.date as Date) || 0)
+      .y((d) => yScale(d.value as number) || 0)
+
+    // Render the line chart
+    svg
+      .append('path')
+      .datum(data)
+      .attr('fill', 'none')
+      .attr('stroke', 'blue') // You can customize the line color here
+      .attr('stroke-width', 2)
+      .attr('d', line)
+      .attr('transform', `translate(${margin.left},${margin.top})`);
+  }, [data]);
+
+  return (
+    <div>
+      <LineChartContainer ref={svgRef}></LineChartContainer>
+    </div>
+  );
+};
+
+export default LineChart;

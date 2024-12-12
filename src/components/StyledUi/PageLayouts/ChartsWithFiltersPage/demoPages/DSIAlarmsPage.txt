@@ -1,0 +1,103 @@
+import React from 'react';
+import { dsiAlarmsDemoData } from 'components/StyledUi/demoData/dsiAlarmsDemoData';
+import { processAlarmsData } from '../helpers/processAlarmsData';
+import { styledTheme } from 'components/StyledUi/theme';
+import { ChartsWithFiltersPage } from '../ChartsWithFiltersPage';
+import { VirtualizedTable, VirtualizedTablePropsColumnsConfig } from '../tables/VirtualizedTable';
+import { useData } from '../hooks';
+import { parseISO, format } from 'date-fns';
+
+const dataProps = {
+  // ads the start of day as an iso string to new key `date`
+  addDateAsKey: `date`,
+  // calculates duration and adds new key `duration`
+  //addDurationAsKey: `duration`,
+  startTimeKey: `timestamp`,
+  //endTimeKey: `endTimestamp`,
+  //timeZone: `CST6CDT`,
+  convertDatesToISO: true,
+  convertKeys: {
+    sender_id: {
+      0: `Custom Alert`,
+      1: `it's on fire`,
+      2: `the door is open`,
+      5: `total meltdown`,
+      19: `too cold`,
+      addAsNewKey: `group`
+    }
+  }
+};
+
+const csvFileSettings = {
+  fileName: `demo_file-name_2023-10-30_to_2023-11-15`
+};
+
+const pageViewProps = {
+  categoryKey: `date`,
+  csvFileSettings,
+  charts: [
+    {
+      title: 'Stacked Bar Chart',
+      chartType: 'stacked-bar',
+      groupKey: 'group',
+      categoryKey: 'date',
+      colors: styledTheme.charts.alarms
+    },
+    {
+      title: 'Pie Chart By Type',
+      chartType: 'pie-with-legend',
+      groupKey: 'group'
+    }
+  ]
+};
+
+const demoColumnsConfig: VirtualizedTablePropsColumnsConfig[] = [
+  {
+    label: `Date`,
+    dataKey: `timestamp`,
+    width: 110,
+    cellRenderer: ({ cellData }) => {
+      const date = format(parseISO(cellData), 'P - p');
+      return date;
+    },
+    flexGrow: 1
+  },
+  {
+    label: `Type`,
+    dataKey: `group`,
+    width: 50,
+    flexGrow: 1
+  },
+  {
+    label: `Description`,
+    dataKey: `message`,
+    width: 200,
+    flexGrow: 1
+  }
+];
+const DemoAllAlarmsTable = (): JSX.Element => {
+  const { data, isLoading, hasError, hasMessage } = useData();
+  return (
+    <VirtualizedTable
+      columnsConfig={demoColumnsConfig}
+      {...{ data, isLoading, hasError, hasMessage }}
+    />
+  );
+};
+
+// First, get the data or provide the status.
+// once the data is returned, process it with the processAlarmsData function. you can find help with
+// this by going to file processAlarmsData.tsx and reading the comments.
+//
+// once the data is formatted, you send it the provider for children to consume.
+// pie charts, search, history buttons, and download csv button will automatically
+// populate based on provided settings.
+// for information on setting up the properties of each component, refer to that components file
+export const DSIAlarmsDemoPage = (): JSX.Element => {
+  const data = processAlarmsData(dsiAlarmsDemoData, dataProps);
+  return (
+    <ChartsWithFiltersPage {...{ data, ...pageViewProps }}>
+      <DemoAllAlarmsTable />
+    </ChartsWithFiltersPage>
+  );
+};

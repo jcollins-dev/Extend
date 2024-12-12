@@ -1,0 +1,4 @@
+export default {
+  SHOW_REPORT: 'SHOW_REPORT',
+  HIDE_REPORT: 'HIDE_REPORT'
+};

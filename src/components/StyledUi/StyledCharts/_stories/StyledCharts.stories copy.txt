@@ -1,0 +1,61 @@
+import React from 'react';
+import styled from 'styled-components';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+
+import { demoAlarmsData } from './demoAlarmData';
+import { processApiData } from 'components/StyledUi/js';
+import { convertToChartData } from '../_helpers/chartDataHelpers'
+import { StyledPieChart } from '../StyledCharts';
+
+
+// convert the api date to a standard format
+const processedApiData = processApiData(demoAlarmsData, {
+  startTimeKey: 'startTimestamp',
+  endTimeKey: 'endTimestamp',
+  // this adds just the yyyy-mm-dd part of the value of startTimekey in the data object to key 'date'
+  addDateAsKey: 'date',
+  // adds the duration in seconds between the start and end time to key 'duration'
+  addDurationAsKey: 'duration'
+});
+
+const DemoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 500px;
+`
+
+export default {
+  title: 'StyledUi/StyledCharts/Charts'
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+} as ComponentMeta<typeof StyledPieChart>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof StyledPieChart> = (args) => {
+  return (
+    <DemoContainer>
+      <StyledPieChart {...args} />
+    </DemoContainer>
+  )
+};
+
+
+// now we convert the chart data
+const data =
+  processedApiData &&
+  convertToChartData(
+    // the data that has been processed
+    processedApiData,
+    // the key to group the data by, each group is a pie slice
+    'type',
+    {
+      // sets to true to add new key 'percent' to each data object
+      calculatePercents: true
+    }
+  );
+
+export const StyledPieChartDemo = Template.bind({});
+StyledPieChartDemo.args = {
+  data
+}

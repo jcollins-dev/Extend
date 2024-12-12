@@ -1,0 +1,220 @@
+import React from 'react';
+import { PageGrid, PageGridColHeader, TileWidget } from 'components';
+const baseGap = `.3em`;
+
+const pagGridDSIProduct = {
+  gridGap: baseGap,
+  gridAreas: `
+      'title'
+      'c-1'
+      'c-2'
+    `,
+  gridCols: `1fr`,
+  gridRows: `auto auto auto`,
+  mediaBreaks: {
+    md: {
+      gridAreas: `
+          'title   title'
+          'c-1     c-2'
+        `,
+      gridCols: `1fr 1fr`,
+      gridRows: `auto auto`
+    }
+  }
+};
+
+const widgetsDSIProduct = [
+  {
+    ga: 'c-1',
+    title: 'infeed piece size',
+    cellValues: [
+      {
+        value: '544g',
+        label: 'Avg/Last 1min'
+      }
+    ]
+  },
+  {
+    ga: 'c-2',
+    title: 'Outback',
+    subTitle: 'Current PSU',
+    cellValues: [
+      {
+        value: '544g',
+        label: 'Avg/Last 1min'
+      },
+      {
+        value: 'ASU 1',
+        label: '8oz_OUTBACK'
+      },
+      {
+        value: 'ASU 1',
+        label: '16oz_OUTBACK'
+      }
+    ]
+  }
+];
+
+const pagGridDSIQualityPerformance = {
+  gridGap: baseGap,
+  gridAreas: `
+      'quality'
+      'q-1'
+      'performance'
+      'p-1'
+      'p-2'
+      'p-3'
+    `,
+  gridCols: `1fr`,
+  gridRows: `auto`,
+  mediaBreaks: {
+    md: {
+      gridAreas: `
+          'quality performance performance'
+          'q-1     p-1         p-2'
+          'q-1     p-3         p-3'
+        `,
+      gridCols: `1fr 1fr 1fr`
+    },
+    lg: {
+      gridAreas: `
+        'quality performance performance performance'
+        'q-1     q-2         q-3         q4'
+      `,
+    }
+  }
+};
+
+const widgetsDSIQualityCol = [
+  {
+    ga: 'q-1',
+    title: 'Yield',
+    kpiValues: [
+      {
+        value: '75',
+        units: '%',
+        duration: 'Avg/Last 1 min'
+      },
+      {
+        value: 68,
+        units: '%',
+        duration: 'Avg/Current Prod. Day'
+      }
+    ],
+    kpiTarget: {
+      value: 73,
+      units: '%',
+      label: 'Target'
+    },
+    kpiProgress: 49
+  },
+  {
+    ga: 'c-2',
+    title: 'Outback',
+    subTitle: 'Current PSU',
+    cellValues: [
+      {
+        value: '544g',
+        label: 'Avg/Last 1min'
+      },
+      {
+        value: 'ASU 1',
+        label: '8oz_OUTBACK'
+      },
+      {
+        value: 'ASU 1',
+        label: '16oz_OUTBACK'
+      }
+    ]
+  }
+];
+
+const widgetsDSIPerformanceCol = [
+  {
+    ga: 'p-1',
+    title: 'Yield',
+    kpiValues: [
+      {
+        value: '75',
+        units: '%',
+        duration: 'Avg/Last 1 min'
+      },
+      {
+        value: 68,
+        units: '%',
+        duration: 'Avg/Current Prod. Day'
+      }
+    ],
+    kpiTarget: {
+      value: 73,
+      units: '%',
+      label: 'Target'
+    },
+    kpiProgress: 49
+  },
+  {
+    ga: 'p-2',
+    title: 'Outback',
+    subTitle: 'Current PSU',
+    cellValues: [
+      {
+        value: '544g',
+        label: 'Avg/Last 1min'
+      },
+      {
+        value: 'ASU 1',
+        label: '8oz_OUTBACK'
+      },
+      {
+        value: 'ASU 1',
+        label: '16oz_OUTBACK'
+      }
+    ]
+  },
+  {
+    ga: 'p-3',
+    title: 'Outback',
+    subTitle: 'Current PSU',
+    cellValues: [
+      {
+        value: '544g',
+        label: 'Avg/Last 1min'
+      },
+      {
+        value: 'ASU 1',
+        label: '8oz_OUTBACK'
+      },
+      {
+        value: 'ASU 1',
+        label: '16oz_OUTBACK'
+      }
+    ]
+  }
+];
+
+const DSIProductCols = widgetsDSIProduct.map(({ ga, ...props }) => (
+  <TileWidget key={ga} ga={ga} {...props} />
+));
+
+const DSIQualityCol = widgetsDSIQualityCol.map(({ ga, ...props }) => (
+  <TileWidget key={ga} ga={ga} {...props} />
+));
+
+export const PageDemoDSIProduction = (): JSX.Element => {
+  return (
+    <>
+      <PageGrid {...pagGridDSIProduct}>
+        <PageGridColHeader ga="title">Product</PageGridColHeader>
+        {DSIProductCols}
+      </PageGrid>
+
+      <PageGrid {...pagGridDSIQualityPerformance}>
+        <PageGridColHeader ga='quality'>Quality</PageGridColHeader>
+        {DSIQualityCol}
+        <PageGridColHeader ga='performance'>Performance</PageGridColHeader>
+        s
+      </PageGrid>
+    </>
+
+  );
+};

@@ -1,0 +1,76 @@
+import React from 'react';
+import { LineCardWidget } from '../LineCardWidget';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+
+export default {
+  //title: 'Demo/LineCardWidget',
+  component: LineCardWidget
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+
+} as ComponentMeta<typeof LineCardWidget>;
+
+// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const Template: ComponentStory<typeof LineCardWidget> = (args) => {
+  return <LineCardWidget {...args} />;
+};
+
+export const WithMain = Template.bind({});
+WithMain.args = {
+  name: 'm-fryer',
+
+  //SubHeader: 'Recipe: Beef Meatballs',
+
+  // headerIcon: {
+  //   handleClick: () => console.log('icon clicked'),
+  //   label: 'header icon',
+  //   toolTip: 'header icon tool tip'
+  // },
+
+  // tagData: [
+  //   {
+  //   "tag": {
+  //     "name": "Retention Time",
+  //     "value": "1 hour"
+  //   },
+  //   "setPoint": {
+  //     "name": "Oil Temp",
+  //     "value": "100C"
+  //   }
+  // },
+  // {
+  //   "tag": {
+  //     "name": "Retention Time",
+  //     "value": "1 hour"
+  //   },
+  //   "setPoint": {
+  //     "name": "Oil Temp",
+  //     "value": "100C"
+  //   }
+  // },
+  // {
+  //   "tag": {
+  //     "name": "Retention Time",
+  //     "value": "1 hour"
+  //   },
+  //   "setPoint": {
+  //     "name": "Oil Temp",
+  //     "value": "100C"
+  //   }
+  // }],
+
+  // issuesData: [{
+  //   type: 'warning',
+  //   time: '11:00:20',
+  //   description: 'Alert Description'
+  // }, {
+  //   type: 'error',
+  //   time: '1:00:20',
+  //   description: 'Alarm Description'
+  // }]
+
+  //SubHeader: 'sub header',
+  //SubTitle: 'past 24 hours',
+  //hasDatePicker: true,
+  //showDateRange: true,
+  //Main: <div className='ui-main no-padding'>main content</div>
+}

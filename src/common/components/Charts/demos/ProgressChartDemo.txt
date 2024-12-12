@@ -1,0 +1,48 @@
+import React, { useState } from 'react';
+import {
+  ProgressPieChart,
+  ProgressPieChartProps
+} from '../';
+import { PieChartDemoContainer } from './Demos.elements';
+export const ProgressChartDemo = ({
+  isDoughnut,
+  progress,
+  color,
+  ...props
+}: ProgressPieChartProps): JSX.Element => {
+
+  const [curProgress, setCurrProgress] = useState<number>(progress || 20);
+  const [doughnut, setDoughnut] = useState<boolean>(isDoughnut ? true : false);
+
+  if (!progress) return <></>;
+
+  return (
+    <PieChartDemoContainer>
+      <header>Progress Bar Chart Demo</header>
+      <div className="select-group">
+        <input
+          type="number"
+          onChange={(e) => setCurrProgress(Number(e.target.value))}
+          value={curProgress}
+        />
+      </div>
+      <div className="toggle-group">
+        <input
+          onChange={() => setDoughnut(!doughnut)}
+          type="checkbox"
+          checked={doughnut ? true : false}
+        />
+        <label>doughnut chart</label>
+      </div>
+      <ProgressPieChart
+        {...{
+          progress: curProgress,
+          groupKey: 'type',
+          isDoughnut: doughnut,
+          color: color || 'green',
+          ...props
+        }}
+      />
+    </PieChartDemoContainer>
+  );
+}; 

@@ -1,0 +1,65 @@
+.ruleGroup {
+  background: none !important;
+  border: 0.1rem solid white !important;
+}
+
+.queryBuilder-branches .rule::before,
+.queryBuilder-branches .rule::after,
+.queryBuilder-branches .ruleGroup .ruleGroup::before,
+.queryBuilder-branches .ruleGroup .ruleGroup::after {
+  border-color: #0076cc;
+}
+
+.queryBuilder-branches .betweenRules::before {
+  border-color: #0076cc;
+}
+
+.menu.alertLogic,
+.menu.alertLogic > ul {
+  list-style: none;
+  padding: 0;
+  left: -0.4rem;
+  padding-left: 1rem;
+}
+
+.menu.alertLogic > li > * {
+  margin: 0 0.5rem;
+}
+
+.menu.alertLogic > ul button,
+.menu.alertLogic button.dropmenu {
+  background: transparent;
+  border: none !important;
+  cursor: pointer;
+}
+
+.menu.alertLogic > ul li {
+  background: #fff;
+  text-align: start;
+  width: 100%;
+  padding-left: 0rem;
+  padding-top: 0.2rem;
+  margin-left: 1rem;
+}
+
+.menu.alertLogic {
+  position: relative;
+  text-transform: uppercase;
+}
+
+.menu.alertLogic > ul {
+  position: absolute;
+  z-index: 9;
+  top: 1rem;
+  padding: 0;
+}
+
+.li-btn {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 450;
+  font-size: small;
+  line-height: 1rem;
+  cursor: pointer;
+  padding: 0.2rem unset;
+}

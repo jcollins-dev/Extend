@@ -1,0 +1,4 @@
+export default {
+  SET_TOKENS: 'SET_TOKENS',
+  DELETE_TOKENS: 'DELETE_TOKENS'
+};

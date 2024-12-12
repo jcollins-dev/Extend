@@ -1,0 +1,120 @@
+import React, { useLayoutEffect, useState } from 'react';
+import { useHistoricRecipes } from './useHistoricRecipes';
+import { ChartsDataFilter } from 'components/StyledUi/ChartsDataFilter';
+
+import {
+  GroupSelectLists,
+  useGroupSelectList,
+  PieChart,
+  StackedBarChart,
+  convertToChartData,
+  generateCategoriesArray,
+  convertToStackedChartData,
+  calculateStackedMaxDomain,
+  WidgetUi,
+  DimensionsContainer
+} from 'components/StyledUi';
+import { PageGrid } from 'components/StyledUi';
+
+import { SelectListHistoryButtons } from 'components/StyledUi/SelectListV2/SelectListHistoryButtons';
+
+const gridSettings = {
+  gridCols: `200px 1fr 250px`,
+  gridRows: `250px`
+};
+
+const HistoricRecipesPieChart = (): JSX.Element => {
+  //const { selected, handle } = useGroupSelectList()
+  const { tableValues } = useHistoricRecipes();
+  if (!tableValues) return <></>;
+  const data = convertToChartData(tableValues, `activerecipe`);
+  return <PieChart {...{ data, handleClick: (groupId: string) => alert(`${groupId}click pie`) }} />;
+};
+
+const HistoricRecipesStackedBarChart = ({ width, height }: { width?: number, height?: number }): JSX.Element => {
+  const { selected, handle } = useGroupSelectList();
+  const { tableValues } = useHistoricRecipes();
+
+  if (!tableValues) return <></>;
+
+  const data = convertToStackedChartData(tableValues, `activerecipe`, `date`);
+
+  // gets the max number of values per column, this to get the max height of each bar column
+  const maxDomain = calculateStackedMaxDomain(tableValues, `date`);
+  // generates categories to stack recipes by date in the stacked bar chart
+  const categories = generateCategoriesArray(tableValues, `date`);
+
+  return (
+    <StackedBarChart
+      {...{
+        data,
+        handleClick: (groupId: string, itemId: string) => handle?.(`toggleItem`, groupId, itemId),
+        maxDomain,
+        categories,
+        selected,
+        width,
+        height: height ? height + 50 : undefined
+      }}
+    />
+  );
+};
+
+const HistoricRecipesSelectList = () => {
+  const { selected, handle } = useGroupSelectList();
+  const groupIds = selected ? Object.keys(selected).map((k) => k.toLowerCase()) : undefined;
+  const [colors, setColors] = useState<Record<string, string> | undefined>(undefined);
+
+  useLayoutEffect(() => {
+    if (groupIds && !colors) {
+      let colors: Record<string, string> = {};
+      groupIds.map((id) => {
+        // Get the HTML element by its data-bar-id attribute
+        const barElement: Element | null = document.querySelector(`[data-chart-id="${id}"]`);
+        if (barElement) {
+          const fillColor = window.getComputedStyle(barElement).getPropertyValue('fill');
+          if (!colors[id]) colors = { ...colors, [id]: fillColor };
+          // Get the fill color of the element
+        }
+      });
+      setColors(colors);
+    }
+  }, []);
+
+  return (
+    <GroupSelectLists
+      {...{
+        items: selected,
+        handle,
+        className: `historic-recipes-group-select scroll-y`,
+        colors
+      }}
+    />
+  );
+};
+export const HistoricRecipesCharts = (): JSX.Element => {
+
+  const { tableValues, isLoading, hasError, hasMessage } = useHistoricRecipes()
+
+  const totalRecipes = tableValues?.length
+
+
+
+  return (
+    <ChartsDataFilter {...chartsDataFIlterSettings}>
+
+</ChartsDataFilter>
+    <WidgetUi title={`Recipe by time and distribution [${totalRecipes}]`} Main={
+      <PageGrid {...gridSettings} className="historic-recipes-page-grid">
+        <HistoricRecipesSelectList />
+        <DimensionsContainer Component={HistoricRecipesStackedBarChart} />
+        <DimensionsContainer Component={HistoricRecipesPieChart} />
+      </PageGrid>
+    } />
+  );
+};
+/*
+ <SelectListHistoryButtons />
+        <HistoricRecipesSelectList />
+        <HistoricRecipesCharts />
+        <HistoricRecipesPieChart />
+        */
